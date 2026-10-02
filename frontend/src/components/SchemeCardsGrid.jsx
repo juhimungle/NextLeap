@@ -94,9 +94,9 @@ const SCHEME_DATA = [
 
 export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQuestion, disabled }) {
   return (
-    <div className="w-full flex-1 flex flex-col justify-between mt-2 min-h-0">
+    <div className="w-full flex flex-col lg:flex-1 lg:justify-between mt-2.5 min-h-0">
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-1.5 px-0.5 shrink-0">
+      <div className="flex items-center justify-between mb-2 px-0.5 shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-[#00D09C] shadow-[0_0_8px_#00D09C] animate-pulse shrink-0" />
           <h2 className="text-xs sm:text-[13px] font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-mono">
@@ -108,8 +108,8 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
         </span>
       </div>
 
-      {/* 4 WealthTech Cards Grid (2x2 Layout, flex-1 to fill bottom evenly) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1 min-h-0">
+      {/* 4 WealthTech Cards Grid (1 column stacked on mobile, 2x2 grid on desktop) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:flex-1 lg:min-h-0 pb-1">
         {SCHEME_DATA.map((scheme) => {
           const isSelected = selectedScheme === scheme.id;
           const Icon = scheme.icon;
@@ -118,7 +118,7 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
             <div
               key={scheme.id}
               onClick={() => onSelectScheme(scheme.id)}
-              className={`group relative rounded-2xl p-2.5 sm:p-3 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none overflow-hidden ${
+              className={`group relative rounded-2xl p-2.5 sm:p-3 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none shrink-0 lg:shrink ${
                 isSelected
                   ? 'border-[#00D09C] bg-white dark:bg-slate-900/95 shadow-md dark:shadow-[0_0_24px_rgba(0,208,156,0.22)] ring-1 ring-[#00D09C]/60 scale-[1.01]'
                   : 'border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/40 hover:border-slate-300 dark:hover:border-slate-500 hover:shadow-md active:scale-[0.98]'
@@ -127,27 +127,27 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
               {/* Top Accent Gradient Line */}
               <div className={`absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r ${scheme.topGradient}`} />
 
-              {/* Card Top: Icon, Name */}
+              {/* Card Top: Icon, Name & Tag */}
               <div>
-                <div className="flex items-center gap-2 mb-1 pt-0.5 min-w-0">
-                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150 shrink-0`}>
-                    <Icon className="w-3.5 h-3.5" />
+                <div className="flex items-center justify-between gap-1.5 mb-1 pt-0.5">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150 shrink-0`}>
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                    <h3 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
+                      {scheme.name}
+                    </h3>
                   </div>
-                  <h3 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
-                    {scheme.name}
-                  </h3>
+                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${scheme.badgeBg}`}>
+                    {scheme.tag}
+                  </span>
                 </div>
 
-                {/* Category, Tag & Sparkline */}
+                {/* Category & Sparkline */}
                 <div className="flex items-center justify-between gap-1 mb-1.5">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">
-                      {scheme.category}
-                    </p>
-                    <span className={`text-[8.5px] font-bold px-1.5 py-0.2 rounded-full border shrink-0 hidden sm:inline-block ${scheme.badgeBg}`}>
-                      {scheme.tag}
-                    </span>
-                  </div>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">
+                    {scheme.category}
+                  </p>
                   <svg viewBox="0 0 70 20" className="w-10 h-3 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
                     <path d={scheme.sparklineArea} fill={`${scheme.sparklineColor}25`} />
                     <path d={scheme.sparklinePath} fill="none" stroke={scheme.sparklineColor} strokeWidth="1.5" strokeLinecap="round" />
@@ -167,7 +167,7 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
 
               {/* Card Footer: Benchmark & 1-Click Ask Button */}
               <div className="pt-1.5 mt-1 flex items-center justify-between border-t border-slate-200/60 dark:border-white/5">
-                <span className="text-[9px] text-slate-500 dark:text-slate-400 truncate max-w-[130px] font-mono" title={scheme.benchmark}>
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 truncate max-w-[150px] font-mono" title={scheme.benchmark}>
                   {scheme.benchmark}
                 </span>
 

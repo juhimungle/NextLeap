@@ -82,10 +82,10 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       />
 
       {/* Header: Title & Grounding Beacon */}
-      <div className="flex items-center justify-between pb-1.5 border-b border-slate-200/60 dark:border-white/10">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between pb-1.5 border-b border-slate-200/60 dark:border-white/10 gap-2">
+        <div className="flex items-center gap-2 min-w-0">
           <div
-            className="w-6 h-6 rounded-lg flex items-center justify-center border transition-colors duration-200"
+            className="w-6 h-6 rounded-lg flex items-center justify-center border transition-colors duration-200 shrink-0"
             style={{
               backgroundColor: `${currentChart.color}20`,
               borderColor: `${currentChart.color}40`
@@ -93,23 +93,23 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
           >
             <TrendingUp className="w-3.5 h-3.5" style={{ color: currentChart.color }} />
           </div>
-          <div>
-            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5 font-mono">
+          <div className="min-w-0">
+            <div className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5 font-mono truncate">
               <span>Verified Scheme Trajectory</span>
               <span
-                className="w-1.5 h-1.5 rounded-full animate-ping"
+                className="w-1.5 h-1.5 rounded-full animate-ping shrink-0"
                 style={{ backgroundColor: currentChart.color }}
               />
             </div>
-            <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+            <div className="text-[9.5px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate">
               {currentChart.benchmark} • Factsheet Grounded
             </div>
           </div>
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-[10px] font-mono text-slate-700 dark:text-slate-300">
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-[9px] sm:text-[10px] font-mono text-slate-700 dark:text-slate-300 shrink-0">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span>{isLoading ? 'SEARCHING RAG...' : '100% GROUNDED'}</span>
+          <span>{isLoading ? 'RAG...' : '100% GROUNDED'}</span>
         </div>
       </div>
 

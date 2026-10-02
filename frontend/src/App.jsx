@@ -201,7 +201,7 @@ export default function App() {
         </section>
 
         {/* Right Column (42% width): Scheme Explorer & Live NAV Telemetry */}
-        <section className={`w-full lg:w-[42%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3.5 sm:p-4.5 relative overflow-hidden h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] justify-between ${
+        <section className={`w-full lg:w-[42%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3 sm:p-4.5 relative h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] overflow-y-auto lg:overflow-hidden lg:justify-between scrollbar-none gap-3 lg:gap-0 ${
           mobileTab === 'schemes' ? 'flex' : 'hidden lg:flex'
         }`}>
           {/* Top Neon Edge Accent */}
