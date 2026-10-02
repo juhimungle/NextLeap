@@ -119,31 +119,13 @@ export default function App() {
             </p>
           </div>
 
-          {/* 3D Visual Hero Hologram Card - Framed to eliminate overflow with Pro Neon Edge Beam */}
-          <div className="w-full md:w-80 lg:w-96 rounded-3xl bg-gradient-to-b from-[#0f172a]/95 via-[#0b1322]/95 to-[#060b14]/98 border border-white/10 p-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_24px_rgba(16,185,129,0.08)] flex flex-col justify-between relative overflow-hidden shrink-0 group hover:border-emerald-500/30 transition-all duration-300">
-            {/* Top Glowing Neon Border Beam */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#10b981]" />
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-16 right-0 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+          {/* Seamless Merged 3D Mutual Fund Telemetry (No Box, Fully Integrated with Main Page) */}
+          <div className="w-full md:w-[420px] lg:w-[480px] h-52 sm:h-60 flex flex-col items-center justify-center relative select-none shrink-0 my-2">
+            {/* Seamless Soft Backlight Aura directly behind the 3D graph */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-sky-500/15 to-indigo-500/20 rounded-full filter blur-[64px] pointer-events-none" />
 
-            {/* Hologram Card Top Bar */}
-            <div className="flex items-center justify-between pb-2 border-b border-white/5 text-[11px] font-semibold text-slate-300 relative z-10">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-mono">
-                <TrendingUp className="w-3.5 h-3.5" />
-                <span>Mutual Fund Telemetry</span>
-              </span>
-              <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border transition-all ${
-                isLoading
-                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50 animate-pulse'
-                  : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-              }`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${isLoading ? 'bg-emerald-300 animate-ping' : 'bg-emerald-400'}`} />
-                <span>{isLoading ? "Searching RAG..." : "Live NAV Tracking"}</span>
-              </span>
-            </div>
-
-            {/* 3D Canvas Box */}
-            <div className="w-full h-36 sm:h-40 flex items-center justify-center relative overflow-hidden my-1">
+            {/* Borderless Floating 3D Scene */}
+            <div className="w-full h-full relative z-10 flex items-center justify-center">
               <Suspense fallback={
                 <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-400/40 animate-spin" />
               }>
@@ -151,13 +133,12 @@ export default function App() {
               </Suspense>
             </div>
 
-            {/* Hologram Card Bottom Info */}
-            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 relative z-10">
-              <span className="flex items-center gap-1 text-slate-300">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                <span>4 Core Schemes</span>
+            {/* Seamless Floating Live Telemetry Chip */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/70 border border-white/10 text-[11px] text-slate-300 backdrop-blur-md shadow-xl -mt-3 relative z-20 font-mono">
+              <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-emerald-300 animate-ping' : 'bg-emerald-400'}`} />
+              <span className="font-semibold text-slate-200">
+                {isLoading ? "Searching Verified RAG Corpus..." : "HDFC AMC • SEBI Verified Feed"}
               </span>
-              <span className="text-slate-500">563 Chunks • SEBI/AMFI</span>
             </div>
           </div>
         </section>

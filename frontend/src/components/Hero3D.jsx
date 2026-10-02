@@ -216,20 +216,28 @@ function MutualFundVisualizer({ isDark, reduceMotion, isLoading }) {
         {/* Dynamic Growth Trendline */}
         <GrowthTrendLine isLoading={isLoading} />
 
-        {/* 3D Holographic Grid Floor Platform */}
-        <gridHelper
-          args={[3.4, 10, "#10b981", "#1e293b"]}
-          position={[0, -0.73, 0]}
-        />
-
-        {/* Outer Circular Asset Allocation Ring */}
-        <mesh position={[0, -0.73, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[1.45, 0.016, 16, 80]} />
+        {/* Floating Asset Allocation Concentric Glowing Rings (Circular, No Box) */}
+        <mesh position={[0, -0.72, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[1.35, 0.014, 16, 80]} />
+          <meshStandardMaterial
+            color="#38bdf8"
+            emissive="#0284c7"
+            emissiveIntensity={isLoading ? 1.6 : 0.7}
+          />
+        </mesh>
+        <mesh position={[0, -0.72, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[1.65, 0.01, 16, 80]} />
           <meshStandardMaterial
             color="#10b981"
-            emissive="#10b981"
-            emissiveIntensity={isLoading ? 1.6 : 0.6}
+            emissive="#059669"
+            emissiveIntensity={isLoading ? 1.4 : 0.5}
           />
+        </mesh>
+
+        {/* Soft Ambient Ground Bloom Disc */}
+        <mesh position={[0, -0.74, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[1.6, 32]} />
+          <meshBasicMaterial color="#10b981" transparent opacity={0.07} />
         </mesh>
       </Float>
     </group>
