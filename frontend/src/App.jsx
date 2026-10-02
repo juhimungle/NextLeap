@@ -104,39 +104,72 @@ export default function App() {
         onOpenGuide={() => setGuideOpen(true)}
       />
 
-      {/* Main Content Container - Expansive max-w-6xl xl:max-w-7xl to eliminate empty side voids */}
-      <main className="relative z-10 flex-1 max-w-6xl xl:max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col gap-3 sm:gap-4">
-        {/* Hero Section */}
-        <section className="w-full flex flex-col md:flex-row items-center justify-between gap-5 lg:gap-8 py-1 sm:py-2">
-          {/* Headline & Subtitle */}
-          <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start gap-2.5">
-            <HeroDisclaimerBadge />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-sky-300 bg-clip-text text-transparent leading-tight drop-shadow-sm">
-              FACTS-ONLY MUTUAL FUND ASSISTANT
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-              Ask factual questions about mutual fund schemes using verified official sources from HDFC AMC, SEBI, and AMFI. Strict adherence to zero investment advice.
-            </p>
+      {/* Main Content Container */}
+      <main className="relative z-10 flex-1 max-w-6xl xl:max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col gap-5">
+        {/* Top Hero Section */}
+        <section className="w-full flex flex-col items-center text-center gap-3 pt-2 pb-1">
+          <HeroDisclaimerBadge />
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-sky-300 bg-clip-text text-transparent leading-tight drop-shadow-sm max-w-4xl">
+            FACTS-ONLY MUTUAL FUND ASSISTANT
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            Directly interrogates official scheme information documents (SIDs), key information memoranda (KIMs), and SEBI/AMFI regulatory guidelines for factual certainty. Zero investment advice.
+          </p>
 
-            {/* Institutional Trust Badges Row */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 font-mono text-[11px]">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-semibold shadow-xs">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                4 Curated Schemes
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 font-semibold shadow-xs">
-                <Cpu className="w-3 h-3 text-sky-400" />
-                24 SIDs & KIMs
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 font-semibold shadow-xs">
-                <TrendingUp className="w-3 h-3 text-indigo-400" />
-                563 Chunks Indexed
-              </span>
-            </div>
+          {/* Institutional Trust Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-[11px]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-semibold shadow-xs">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              4 Curated Schemes
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 font-semibold shadow-xs">
+              <Cpu className="w-3 h-3 text-sky-400" />
+              24 SIDs & KIMs
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 font-semibold shadow-xs">
+              <TrendingUp className="w-3 h-3 text-indigo-400" />
+              563 Chunks Indexed
+            </span>
           </div>
 
-          {/* Institutional Telemetry Engine Card with Animated NAV Graph */}
-          <div className="shrink-0 my-1">
+          {/* PROMINENT CHATBOT INPUT BAR (Centerpiece - Immediately Visible Above the Fold) */}
+          <div className="w-full max-w-3xl mt-2">
+            <InputBar
+              onSendMessage={handleSendMessage}
+              isLoading={isLoading}
+              onClearChat={handleClearChat}
+              hasMessages={messages.length > 0}
+            />
+          </div>
+        </section>
+
+        {/* Live Conversation Stream (Only shows when messages or loading exist, completely merged into page) */}
+        {(messages.length > 0 || isLoading || error) && (
+          <section className="w-full max-w-4xl mx-auto py-2">
+            <ChatPanel
+              messages={messages}
+              isLoading={isLoading}
+              error={error}
+              onRetry={handleRetry}
+              onSelectQuestion={handleSendMessage}
+            />
+          </section>
+        )}
+
+        {/* Seamless Financial Telemetry & Scheme Directory (Integrated Into Page Background) */}
+        <section className="w-full flex flex-col lg:flex-row gap-4 items-start justify-between mt-1">
+          {/* 4 Scheme Directory Cards */}
+          <div className="flex-1 w-full">
+            <SchemeCardsGrid
+              selectedScheme={selectedScheme}
+              onSelectScheme={setSelectedScheme}
+              onAskQuestion={handleSendMessage}
+              disabled={isLoading}
+            />
+          </div>
+
+          {/* Interactive Animated Financial NAV Graph */}
+          <div className="w-full lg:w-[420px] shrink-0 lg:mt-9">
             <TelemetryCard
               isLoading={isLoading}
               selectedScheme={selectedScheme}
@@ -144,32 +177,6 @@ export default function App() {
             />
           </div>
         </section>
-
-        {/* Scheme Directory Cards Grid (WealthTech / Groww Style) */}
-        <SchemeCardsGrid
-          selectedScheme={selectedScheme}
-          onSelectScheme={setSelectedScheme}
-          onAskQuestion={handleSendMessage}
-          disabled={isLoading}
-        />
-
-        {/* Chat Card Container - Expands comfortably with Pro Neon Edge Beam */}
-        <div className="w-full flex-1 rounded-3xl glass-panel p-3 sm:p-5 lg:p-6 shadow-2xl flex flex-col border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent shadow-[0_0_12px_#6366f1]" />
-          <ChatPanel
-            messages={messages}
-            isLoading={isLoading}
-            error={error}
-            onRetry={handleRetry}
-            onSelectQuestion={handleSendMessage}
-          />
-          <InputBar
-            onSendMessage={handleSendMessage}
-            isLoading={isLoading}
-            onClearChat={handleClearChat}
-            hasMessages={messages.length > 0}
-          />
-        </div>
       </main>
 
       {/* Sources Drawer/Modal */}

@@ -68,7 +68,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
   };
 
   return (
-    <div className="w-full md:w-[440px] lg:w-[480px] rounded-2xl p-4 glass-card border border-white/10 shadow-2xl relative overflow-hidden select-none">
+    <div className="w-full rounded-2xl p-4 bg-slate-900/40 backdrop-blur-xl border border-white/5 shadow-xl relative overflow-hidden select-none">
       {/* Top Ambient Glow Beam */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-300"
@@ -111,7 +111,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Interactive Scheme Filter Tabs */}
-      <div className="flex items-center justify-between gap-1 mt-2.5 p-1 rounded-xl bg-slate-900/70 border border-white/5 text-[11px] font-mono">
+      <div className="flex items-center justify-between gap-1 mt-2.5 p-1 rounded-xl bg-slate-900/60 border border-white/5 text-[11px] font-mono">
         {Object.entries(SCHEME_CHARTS).map(([key, data]) => {
           const isActive = activeTab === key;
           return (
@@ -133,7 +133,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Live Animated Financial Area Graph */}
-      <div className="relative mt-2.5 pt-1 pb-1 px-2 rounded-xl bg-[#070c17]/90 border border-white/5 overflow-hidden">
+      <div className="relative mt-2.5 pt-1 pb-1 px-2 rounded-xl bg-transparent border border-white/5 overflow-hidden">
         {/* Subtle Horizontal Reference Grid Lines */}
         <div className="absolute inset-0 flex flex-col justify-between py-3 px-4 pointer-events-none opacity-20">
           <div className="border-b border-dashed border-slate-500 w-full" />
