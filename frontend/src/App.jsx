@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import SchemeSelector from './components/SchemeSelector';
 import SchemeCardsGrid from './components/SchemeCardsGrid';
@@ -22,6 +22,16 @@ export default function App() {
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [lastQuestion, setLastQuestion] = useState('');
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    }
+  }, [isDark]);
 
   const handleSendMessage = async (question) => {
     if (!question || isLoading) return;
