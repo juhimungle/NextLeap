@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+
+# ChromaDB & Large Data Documents
+backend/data/documents/*.pdf
+backend/data/documents/*.html
+.pytest_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+dist/
+.DS_Store
+*.log
