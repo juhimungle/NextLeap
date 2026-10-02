@@ -10,8 +10,7 @@ import GuideModal from './components/GuideModal';
 import { HeroDisclaimerBadge, FooterDisclaimer } from './components/DisclaimerBanner';
 import { Cpu, CheckCircle2, TrendingUp } from 'lucide-react';
 
-// Lazy-load 3D Hero scene so chat and UI are interactive immediately
-const Hero3D = lazy(() => import('./components/Hero3D'));
+import TelemetryCard from './components/TelemetryCard';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
@@ -108,7 +107,7 @@ export default function App() {
       {/* Main Content Container - Expansive max-w-6xl xl:max-w-7xl to eliminate empty side voids */}
       <main className="relative z-10 flex-1 max-w-6xl xl:max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col gap-3 sm:gap-4">
         {/* Hero Section */}
-        <section className="w-full flex flex-col md:flex-row items-center justify-between gap-4 lg:gap-8 py-1 sm:py-2">
+        <section className="w-full flex flex-col md:flex-row items-center justify-between gap-5 lg:gap-8 py-1 sm:py-2">
           {/* Headline & Subtitle */}
           <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start gap-2.5">
             <HeroDisclaimerBadge />
@@ -118,35 +117,27 @@ export default function App() {
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
               Ask factual questions about mutual fund schemes using verified official sources from HDFC AMC, SEBI, and AMFI. Strict adherence to zero investment advice.
             </p>
-          </div>
 
-          {/* Seamless Merged 3D Mutual Fund Telemetry (No Box, Fully Integrated with Main Page) */}
-          <div className="w-full md:w-[420px] lg:w-[480px] h-52 sm:h-60 flex flex-col items-center justify-center relative select-none shrink-0 my-2">
-            {/* Seamless Soft Backlight Aura directly behind the 3D graph */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-sky-500/15 to-indigo-500/20 rounded-full filter blur-[64px] pointer-events-none" />
-
-            {/* Borderless Floating 3D Scene */}
-            <div className="w-full h-full relative z-10 flex items-center justify-center">
-              <Suspense fallback={
-                <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-400/40 animate-spin" />
-              }>
-                <Hero3D
-                  isDark={isDark}
-                  reduceMotion={reduceMotion}
-                  isLoading={isLoading}
-                  selectedScheme={selectedScheme}
-                  onSelectScheme={setSelectedScheme}
-                />
-              </Suspense>
-            </div>
-
-            {/* Seamless Floating Live Telemetry Chip */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/70 border border-white/10 text-[11px] text-slate-300 backdrop-blur-md shadow-xl -mt-3 relative z-20 font-mono">
-              <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-emerald-300 animate-ping' : 'bg-emerald-400'}`} />
-              <span className="font-semibold text-slate-200">
-                {isLoading ? "Searching Verified RAG Corpus..." : "HDFC AMC • SEBI Verified Feed"}
+            {/* Institutional Trust Badges Row */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 font-mono text-[11px]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-semibold shadow-xs">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                4 Curated Schemes
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 font-semibold shadow-xs">
+                <Cpu className="w-3 h-3 text-sky-400" />
+                24 SIDs & KIMs
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 font-semibold shadow-xs">
+                <TrendingUp className="w-3 h-3 text-indigo-400" />
+                563 Chunks Indexed
               </span>
             </div>
+          </div>
+
+          {/* Institutional Telemetry Engine Card */}
+          <div className="shrink-0 my-1">
+            <TelemetryCard isLoading={isLoading} />
           </div>
         </section>
 
@@ -166,6 +157,7 @@ export default function App() {
             isLoading={isLoading}
             error={error}
             onRetry={handleRetry}
+            onSelectQuestion={handleSendMessage}
           />
           <InputBar
             onSendMessage={handleSendMessage}

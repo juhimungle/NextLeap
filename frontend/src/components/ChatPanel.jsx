@@ -93,51 +93,100 @@ function AssistantCard({ msg }) {
   );
 }
 
-export default function ChatPanel({ messages, isLoading, error, onRetry }) {
+export default function ChatPanel({ messages, isLoading, error, onRetry, onSelectQuestion }) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
+  const FEATURED_PROMPTS = [
+    {
+      category: "Scheme Facts",
+      query: "What is the expense ratio and exit load of HDFC Flexi Cap Fund?",
+      icon: "📊"
+    },
+    {
+      category: "Statutory & Tax",
+      query: "What is the mandatory 3-year lock-in rule for HDFC ELSS Tax Saver?",
+      icon: "🔒"
+    },
+    {
+      category: "SEBI Compliance",
+      query: "Should I buy HDFC Mid-Cap Opportunities Fund right now?",
+      icon: "🛡️"
+    },
+    {
+      category: "Scheme Rebranding",
+      query: "What was HDFC Large Cap Fund named before January 1, 2025?",
+      icon: "🏛️"
+    }
+  ];
+
   return (
     <div className="w-full flex-1 flex flex-col gap-4 overflow-y-auto px-1 py-2 min-h-[300px] max-h-[520px]">
       {/* Empty State / Welcome Showcase */}
       {messages.length === 0 && (
-        <div className="p-6 sm:p-8 rounded-3xl glass-card text-center my-auto border border-white/10 shadow-2xl">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-sky-500 to-emerald-400 p-[1px] mx-auto mb-3 shadow-lg shadow-indigo-500/20">
+        <div className="p-5 sm:p-7 rounded-3xl glass-card text-center my-auto border border-white/10 shadow-2xl">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-sky-500 to-indigo-600 p-[1px] mx-auto mb-2.5 shadow-lg shadow-emerald-500/20">
             <div className="w-full h-full rounded-[15px] bg-[#0c1222] flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-sky-400" />
+              <Sparkles className="w-6 h-6 text-emerald-400" />
             </div>
           </div>
-          <h3 className="text-lg font-bold text-white mb-1.5">
+          <h3 className="text-base sm:text-lg font-bold text-white mb-1">
             Welcome to the Facts-Only MF Assistant
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed mb-4">
+          <p className="text-xs text-slate-300 max-w-lg mx-auto leading-relaxed mb-4">
             Directly interrogates official scheme information documents (SIDs), key information memoranda (KIMs), and SEBI/AMFI regulatory guidelines for factual certainty.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 max-w-xl mx-auto text-left">
-            <div className="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 flex items-start gap-2">
-              <DatabaseZap className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+          {/* 3 Core Trust Safeguards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 max-w-xl mx-auto text-left mb-4">
+            <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2">
+              <DatabaseZap className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
               <div>
                 <div className="text-[11px] font-bold text-slate-200">24 Official Sources</div>
                 <div className="text-[10px] text-slate-400">Zero third-party aggregators</div>
               </div>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 flex items-start gap-2">
+            <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
               <div>
                 <div className="text-[11px] font-bold text-slate-200">Zero Return Guesses</div>
                 <div className="text-[10px] text-slate-400">Strict refusal of speculation</div>
               </div>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 flex items-start gap-2">
-              <Lock className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+            <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2">
+              <Lock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <div>
                 <div className="text-[11px] font-bold text-slate-200">PII Redaction</div>
                 <div className="text-[10px] text-slate-400">PAN, OTP, phone filtered</div>
               </div>
+            </div>
+          </div>
+
+          {/* Suggested Factual Inquiries */}
+          <div className="max-w-xl mx-auto text-left">
+            <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
+              <span>Suggested Official Inquiries (Click to Ask):</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {FEATURED_PROMPTS.map((item, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => onSelectQuestion && onSelectQuestion(item.query)}
+                  className="p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/90 border border-white/5 hover:border-emerald-500/40 text-left transition-all duration-100 ease-out active:scale-95 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 mb-0.5">
+                    <span>{item.icon}</span>
+                    <span>{item.category}</span>
+                  </div>
+                  <div className="text-[11px] text-slate-300 group-hover:text-white leading-tight font-medium">
+                    {item.query}
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         </div>
