@@ -11,6 +11,9 @@ const SCHEME_DATA = [
     accentColor: "from-emerald-500/25 to-teal-500/10 border-emerald-500/40 text-emerald-400",
     topGradient: "from-emerald-400 via-teal-400 to-emerald-500",
     badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    sparklineColor: "#00D09C",
+    sparklinePath: "M 0 16 Q 20 14, 40 10 T 70 4",
+    sparklineArea: "M 0 16 Q 20 14, 40 10 T 70 4 L 70 20 L 0 20 Z",
     minSip: "₹100",
     exitLoad: "1.00% (within 1 yr)",
     benchmark: "NIFTY 500 TRI",
@@ -30,6 +33,9 @@ const SCHEME_DATA = [
     accentColor: "from-sky-500/25 to-blue-500/10 border-sky-500/40 text-sky-400",
     topGradient: "from-sky-400 via-blue-400 to-indigo-500",
     badgeBg: "bg-sky-500/15 text-sky-300 border-sky-500/30",
+    sparklineColor: "#38bdf8",
+    sparklinePath: "M 0 16 Q 25 12, 50 8 T 70 3",
+    sparklineArea: "M 0 16 Q 25 12, 50 8 T 70 3 L 70 20 L 0 20 Z",
     minSip: "₹100",
     exitLoad: "1.00% (within 1 yr)",
     benchmark: "NIFTY 100 TRI",
@@ -49,6 +55,9 @@ const SCHEME_DATA = [
     accentColor: "from-indigo-500/25 to-purple-500/10 border-indigo-500/40 text-indigo-400",
     topGradient: "from-indigo-400 via-purple-400 to-pink-500",
     badgeBg: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30",
+    sparklineColor: "#a5b4fc",
+    sparklinePath: "M 0 16 Q 20 15, 45 9 T 70 4",
+    sparklineArea: "M 0 16 Q 20 15, 45 9 T 70 4 L 70 20 L 0 20 Z",
     minSip: "₹500",
     exitLoad: "NIL (3-Yr Lock-in)",
     benchmark: "NIFTY 500 TRI",
@@ -68,6 +77,9 @@ const SCHEME_DATA = [
     accentColor: "from-amber-500/25 to-orange-500/10 border-amber-500/40 text-amber-400",
     topGradient: "from-amber-400 via-orange-400 to-yellow-500",
     badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    sparklineColor: "#fbbf24",
+    sparklinePath: "M 0 16 Q 18 13, 38 7 T 70 2",
+    sparklineArea: "M 0 16 Q 18 13, 38 7 T 70 2 L 70 20 L 0 20 Z",
     minSip: "₹100",
     exitLoad: "1.00% (within 1 yr)",
     benchmark: "NIFTY Midcap 150 TRI",
@@ -126,13 +138,23 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
                   </span>
                 </div>
 
-                {/* Scheme Title & Category */}
-                <h3 className="text-sm font-bold text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight mb-1">
-                  {scheme.name}
-                </h3>
-                <p className="text-[11px] text-slate-400 font-medium mb-3">
-                  {scheme.category}
-                </p>
+                {/* Scheme Title & Mini Sparkline Growth Graph */}
+                <div className="flex items-baseline justify-between gap-1 mb-1">
+                  <h3 className="text-sm font-bold text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
+                    {scheme.name}
+                  </h3>
+                </div>
+
+                <div className="flex items-center justify-between gap-1 mb-3">
+                  <p className="text-[11px] text-slate-400 font-medium">
+                    {scheme.category}
+                  </p>
+                  {/* Groww Style Mini NAV Growth Sparkline */}
+                  <svg viewBox="0 0 70 20" className="w-14 h-4 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                    <path d={scheme.sparklineArea} fill={`${scheme.sparklineColor}25`} />
+                    <path d={scheme.sparklinePath} fill="none" stroke={scheme.sparklineColor} strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </div>
 
                 {/* Key Verified Facts Grid with 1-Click Metric Queries */}
                 <div className="grid grid-cols-2 gap-2 py-2 border-t border-b border-white/5 text-[11px] font-mono">

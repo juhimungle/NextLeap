@@ -135,9 +135,13 @@ export default function App() {
             </div>
           </div>
 
-          {/* Institutional Telemetry Engine Card */}
+          {/* Institutional Telemetry Engine Card with Animated NAV Graph */}
           <div className="shrink-0 my-1">
-            <TelemetryCard isLoading={isLoading} />
+            <TelemetryCard
+              isLoading={isLoading}
+              selectedScheme={selectedScheme}
+              onSelectScheme={setSelectedScheme}
+            />
           </div>
         </section>
 
