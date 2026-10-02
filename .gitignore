@@ -16,7 +16,5 @@ backend/data/documents/*.html
 
 # Node / Frontend
 frontend/node_modules/
-frontend/dist/
-dist/
 .DS_Store
 *.log
