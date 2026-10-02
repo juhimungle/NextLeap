@@ -130,7 +130,13 @@ export default function App() {
               <Suspense fallback={
                 <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-400/40 animate-spin" />
               }>
-                <Hero3D isDark={isDark} reduceMotion={reduceMotion} isLoading={isLoading} />
+                <Hero3D
+                  isDark={isDark}
+                  reduceMotion={reduceMotion}
+                  isLoading={isLoading}
+                  selectedScheme={selectedScheme}
+                  onSelectScheme={setSelectedScheme}
+                />
               </Suspense>
             </div>
 

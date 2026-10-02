@@ -11,7 +11,7 @@ export default function Navbar({
 }) {
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
           <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-indigo-600 to-sky-400 p-[1px] shadow-lg shadow-indigo-500/20">
