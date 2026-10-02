@@ -1,11 +1,9 @@
 import React from 'react';
-import { Sun, Moon, ShieldCheck, Database, Zap, ZapOff, CheckCircle2, HelpCircle } from 'lucide-react';
+import { Sun, Moon, ShieldCheck, Database, CheckCircle2, HelpCircle } from 'lucide-react';
 
 export default function Navbar({
   isDark,
   setIsDark,
-  reduceMotion,
-  setReduceMotion,
   onOpenSources,
   onOpenGuide
 }) {
@@ -63,20 +61,6 @@ export default function Navbar({
             <span className="px-1.5 py-0.2 rounded-md bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-[10px] font-mono font-bold">
               24
             </span>
-          </button>
-
-          {/* Reduce Motion Toggle */}
-          <button
-            onClick={() => setReduceMotion(!reduceMotion)}
-            className={`p-2 rounded-xl border text-xs font-medium transition-all cursor-pointer active:scale-95 ${
-              reduceMotion
-                ? 'bg-amber-100 dark:bg-amber-500/15 border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-300'
-                : 'bg-slate-100 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-            title={reduceMotion ? "Motion reduced (click to enable animations)" : "Reduce motion"}
-            aria-label="Toggle reduced motion"
-          >
-            {reduceMotion ? <ZapOff className="w-4 h-4" /> : <Zap className="w-4 h-4" />}
           </button>
 
           {/* Theme Toggle */}

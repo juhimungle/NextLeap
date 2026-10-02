@@ -14,7 +14,6 @@ import TelemetryCard from './components/TelemetryCard';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
-  const [reduceMotion, setReduceMotion] = useState(false);
   const [selectedScheme, setSelectedScheme] = useState('All schemes');
   const [mobileTab, setMobileTab] = useState('assistant'); // 'assistant' | 'schemes'
   const [messages, setMessages] = useState([]);
@@ -110,8 +109,6 @@ export default function App() {
       <Navbar
         isDark={isDark}
         setIsDark={setIsDark}
-        reduceMotion={reduceMotion}
-        setReduceMotion={setReduceMotion}
         onOpenSources={() => setSourcesOpen(true)}
         onOpenGuide={() => setGuideOpen(true)}
       />

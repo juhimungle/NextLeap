@@ -129,9 +129,9 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
 
               {/* Card Top: Icon & Tags */}
               <div>
-                <div className="flex items-start justify-between gap-2 mb-2 pt-1">
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150`}>
-                    <Icon className="w-4 h-4" />
+                <div className="flex items-start justify-between gap-1.5 mb-1.5 pt-0.5">
+                  <div className={`w-7 h-7 rounded-xl flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150`}>
+                    <Icon className="w-3.5 h-3.5" />
                   </div>
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${scheme.badgeBg}`}>
                     {scheme.tag}
@@ -140,17 +140,17 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
 
                 {/* Scheme Title & Mini Sparkline Growth Graph */}
                 <div className="flex items-baseline justify-between gap-1 mb-0.5">
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
                     {scheme.name}
                   </h3>
                 </div>
 
-                <div className="flex items-center justify-between gap-1 mb-2.5">
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                <div className="flex items-center justify-between gap-1 mb-1.5">
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                     {scheme.category}
                   </p>
                   {/* Groww Style Mini NAV Growth Sparkline */}
-                  <svg viewBox="0 0 70 20" className="w-14 h-4 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <svg viewBox="0 0 70 20" className="w-12 h-3.5 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
                     <path d={scheme.sparklineArea} fill={`${scheme.sparklineColor}25`} />
                     <path d={scheme.sparklinePath} fill="none" stroke={scheme.sparklineColor} strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
@@ -209,7 +209,7 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
               </div>
 
               {/* Card Footer: 1-Click Ask Button */}
-              <div className="pt-2.5 mt-1 flex items-center justify-between">
+              <div className="pt-1.5 mt-0.5 flex items-center justify-between">
                 <span className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
                   <CheckCircle2 className="w-3 h-3 text-[#00D09C]" />
                   <span>SID Grounded</span>
