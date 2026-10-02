@@ -87,7 +87,7 @@ export default function Navbar({
           >
             {/* Sun Icon (Dark Mode Active) */}
             <Sun
-              className={`w-4 h-4 text-amber-400 absolute transition-all duration-300 ease-out ${
+              className={`w-4 h-4 text-amber-400 absolute transition-all duration-150 ease-out ${
                 isDark
                   ? 'rotate-0 scale-100 opacity-100 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]'
                   : 'rotate-90 scale-0 opacity-0'
@@ -95,7 +95,7 @@ export default function Navbar({
             />
             {/* Moon Icon (Light Mode Active) */}
             <Moon
-              className={`w-4 h-4 text-indigo-600 absolute transition-all duration-300 ease-out ${
+              className={`w-4 h-4 text-indigo-600 absolute transition-all duration-150 ease-out ${
                 isDark
                   ? '-rotate-90 scale-0 opacity-0'
                   : 'rotate-0 scale-100 opacity-100 drop-shadow-[0_0_8px_rgba(99,102,241,0.4)]'

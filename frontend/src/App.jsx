@@ -95,22 +95,22 @@ export default function App() {
       {/* Living Aurora Mesh Motion (Pure GPU-accelerated CSS) */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {/* Top-Center Indigo/Violet Nebula */}
-        <div className={`absolute -top-40 left-1/2 w-[880px] h-[580px] rounded-full filter blur-[140px] animate-aurora-1 transition-colors duration-500 ${
+        <div className={`absolute -top-40 left-1/2 w-[880px] h-[580px] rounded-full filter blur-[140px] animate-aurora-1 transition-colors duration-150 ${
           isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/35'
         }`} />
 
         {/* Left Electric Cyan/Sky Wave */}
-        <div className={`absolute top-1/4 -left-36 w-[640px] h-[640px] rounded-full filter blur-[160px] animate-aurora-2 transition-colors duration-500 ${
+        <div className={`absolute top-1/4 -left-36 w-[640px] h-[640px] rounded-full filter blur-[160px] animate-aurora-2 transition-colors duration-150 ${
           isDark ? 'bg-sky-600/30' : 'bg-sky-400/30'
         }`} />
 
         {/* Right Emerald/Teal Wealth Glow */}
-        <div className={`absolute top-1/3 -right-36 w-[600px] h-[600px] rounded-full filter blur-[150px] animate-aurora-3 transition-colors duration-500 ${
+        <div className={`absolute top-1/3 -right-36 w-[600px] h-[600px] rounded-full filter blur-[150px] animate-aurora-3 transition-colors duration-150 ${
           isDark ? 'bg-emerald-500/25' : 'bg-emerald-400/30'
         }`} />
 
         {/* Bottom Ambient Golden Amber Accent */}
-        <div className={`absolute -bottom-32 left-1/3 w-[520px] h-[450px] rounded-full filter blur-[170px] opacity-25 animate-pulse transition-colors duration-500 ${
+        <div className={`absolute -bottom-32 left-1/3 w-[520px] h-[450px] rounded-full filter blur-[170px] opacity-25 animate-pulse transition-colors duration-150 ${
           isDark ? 'bg-amber-500/20' : 'bg-amber-300/25'
         }`} />
       </div>
