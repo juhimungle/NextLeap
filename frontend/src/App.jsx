@@ -5,6 +5,7 @@ import ExampleQuestions from './components/ExampleQuestions';
 import ChatPanel from './components/ChatPanel';
 import InputBar from './components/InputBar';
 import SourcesModal from './components/SourcesModal';
+import GuideModal from './components/GuideModal';
 import { HeroDisclaimerBadge, FooterDisclaimer } from './components/DisclaimerBanner';
 
 // Lazy-load 3D Hero scene so chat and UI are interactive immediately
@@ -18,6 +19,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
   const [lastQuestion, setLastQuestion] = useState('');
 
   const handleSendMessage = async (question) => {
@@ -98,6 +100,7 @@ export default function App() {
         reduceMotion={reduceMotion}
         setReduceMotion={setReduceMotion}
         onOpenSources={() => setSourcesOpen(true)}
+        onOpenGuide={() => setGuideOpen(true)}
       />
 
       {/* Main Content Container */}
@@ -160,6 +163,13 @@ export default function App() {
       <SourcesModal
         isOpen={sourcesOpen}
         onClose={() => setSourcesOpen(false)}
+      />
+
+      {/* User Guidance Modal */}
+      <GuideModal
+        isOpen={guideOpen}
+        onClose={() => setGuideOpen(false)}
+        onSelectQuestion={handleSendMessage}
       />
 
       {/* Always Visible Footer Disclaimer */}

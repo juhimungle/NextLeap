@@ -39,6 +39,13 @@ PERFORMANCE_KEYWORDS = [
 ]
 PERFORMANCE_REGEX = re.compile('|'.join(PERFORMANCE_KEYWORDS), re.IGNORECASE)
 
+# Greeting and Help keywords
+GREETING_KEYWORDS = [
+    r'^\s*(?:hi|hello|hey|namaste|greetings|hola)\b',
+    r'\b(?:what\s+can\s+you\s+do|who\s+are\s+you|help(?:\s+me)?|what\s+is\s+this|how\s+to\s+use|how\s+does\s+this\s+work|what\s+should\s+i\s+ask|what\s+can\s+i\s+ask)\b'
+]
+GREETING_REGEX = re.compile('|'.join(GREETING_KEYWORDS), re.IGNORECASE)
+
 def detect_pii(text: str) -> bool:
     """Detects whether text contains personal identifiable information (PII)."""
     if PAN_REGEX.search(text):
@@ -58,7 +65,7 @@ def detect_pii(text: str) -> bool:
 def check_intent(text: str) -> Tuple[str, Optional[str]]:
     """
     Checks user intent:
-    Returns: ("pii", reason) | ("advice", reason) | ("performance", reason) | ("factual", None)
+    Returns: ("pii", reason) | ("advice", reason) | ("performance", reason) | ("greeting", reason) | ("factual", None)
     """
     if detect_pii(text):
         return ("pii", "Personal identifiable information detected.")
@@ -69,4 +76,8 @@ def check_intent(text: str) -> Tuple[str, Optional[str]]:
     if PERFORMANCE_REGEX.search(text):
         return ("performance", "Performance calculation or returns comparison query detected.")
         
+    if GREETING_REGEX.search(text):
+        return ("greeting", "Greeting or usage guidance query detected.")
+
     return ("factual", None)
+

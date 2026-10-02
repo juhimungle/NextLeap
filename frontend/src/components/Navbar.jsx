@@ -1,12 +1,13 @@
 import React from 'react';
-import { Sun, Moon, ShieldCheck, Database, Zap, ZapOff, CheckCircle2 } from 'lucide-react';
+import { Sun, Moon, ShieldCheck, Database, Zap, ZapOff, CheckCircle2, HelpCircle } from 'lucide-react';
 
 export default function Navbar({
   isDark,
   setIsDark,
   reduceMotion,
   setReduceMotion,
-  onOpenSources
+  onOpenSources,
+  onOpenGuide
 }) {
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 transition-colors duration-300">
@@ -41,6 +42,16 @@ export default function Navbar({
 
         {/* Actions & Toggles */}
         <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Guide Button */}
+          <button
+            onClick={onOpenGuide}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-sky-300 hover:text-white bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 transition-all cursor-pointer shadow-sm"
+            title="What questions can you ask?"
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-sky-400" />
+            <span className="hidden xs:inline">What to Ask?</span>
+          </button>
+
           {/* Sources Explorer Button */}
           <button
             onClick={onOpenSources}
@@ -48,7 +59,7 @@ export default function Navbar({
             title="View all 24 verified sources"
           >
             <Database className="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform" />
-            <span>Official Sources</span>
+            <span className="hidden sm:inline">Official Sources</span>
             <span className="px-1.5 py-0.2 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-mono">
               24
             </span>

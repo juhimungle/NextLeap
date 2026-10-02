@@ -171,7 +171,17 @@ def ask_assistant(req: AskRequest) -> AskResponse:
             type="refusal"
         )
 
-    # 4. Retrieval from ChromaDB
+    # 4. Greeting / Assistant Guidance
+    if intent == "greeting":
+        return AskResponse(
+            answer="Hello! I answer verified factual questions about HDFC Flexi Cap, Large Cap, ELSS, and Mid-Cap schemes using official AMC, SEBI, and AMFI sources. You can ask about expense ratios (TER), minimum SIP limits, exit loads, riskometer ratings, benchmarks, or lock-in rules. I strictly avoid buy/sell advice and return predictions.",
+            source_url="https://www.amfiindia.com/investor-corner/knowledge-center/sebi-categorization-and-rationalization-of-mutual-fund-schemes.html",
+            source_title="AMFI Investor Knowledge Centre - Mutual Fund Guidelines",
+            last_updated=DEFAULT_DATE,
+            type="answer"
+        )
+
+    # 5. Retrieval from ChromaDB
     chunks = retrieve_context(req.question, scheme_filter=req.scheme, top_k=settings.TOP_K)
     
     # Check if chunks are sufficient
