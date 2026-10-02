@@ -81,15 +81,26 @@ export default function Navbar({
           {/* Animated Sun / Moon Theme Toggle */}
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all duration-200 cursor-pointer active:scale-95 shadow-xs group"
+            className="relative w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all duration-200 cursor-pointer active:scale-90 shadow-xs flex items-center justify-center overflow-hidden group"
             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme"
           >
-            {isDark ? (
-              <Sun className="w-4 h-4 text-amber-400 group-hover:rotate-90 transition-transform duration-300" />
-            ) : (
-              <Moon className="w-4 h-4 text-indigo-600 group-hover:-rotate-12 transition-transform duration-300" />
-            )}
+            {/* Sun Icon (Dark Mode Active) */}
+            <Sun
+              className={`w-4 h-4 text-amber-400 absolute transition-all duration-300 ease-out ${
+                isDark
+                  ? 'rotate-0 scale-100 opacity-100 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]'
+                  : 'rotate-90 scale-0 opacity-0'
+              }`}
+            />
+            {/* Moon Icon (Light Mode Active) */}
+            <Moon
+              className={`w-4 h-4 text-indigo-600 absolute transition-all duration-300 ease-out ${
+                isDark
+                  ? '-rotate-90 scale-0 opacity-0'
+                  : 'rotate-0 scale-100 opacity-100 drop-shadow-[0_0_8px_rgba(99,102,241,0.4)]'
+              }`}
+            />
           </button>
         </div>
       </div>
