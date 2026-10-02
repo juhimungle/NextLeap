@@ -11,9 +11,75 @@
   }
 }
 
+/* Living Aurora Mesh Animations (GPU Accelerated) */
+@keyframes aurora-float-1 {
+  0% {
+    transform: translate(-50%, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(-46%, 45px) scale(1.08) rotate(15deg);
+  }
+  66% {
+    transform: translate(-54%, -30px) scale(0.96) rotate(-12deg);
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes aurora-float-2 {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(55px, -45px) scale(1.12) rotate(20deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes aurora-float-3 {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-45px, 50px) scale(1.1) rotate(-18deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes aurora-pulse-slow {
+  0%, 100% {
+    opacity: 0.35;
+    filter: blur(140px);
+  }
+  50% {
+    opacity: 0.55;
+    filter: blur(160px);
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-float-1 24s ease-in-out infinite, aurora-pulse-slow 16s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-aurora-2 {
+  animation: aurora-float-2 20s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-aurora-3 {
+  animation: aurora-float-3 28s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
 .bg-grid-pattern {
-  background-image: radial-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .glass-panel {
