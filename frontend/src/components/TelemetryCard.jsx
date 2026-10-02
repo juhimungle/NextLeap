@@ -71,8 +71,8 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
   };
 
   return (
-    <div className="w-full shrink-0 rounded-2xl p-3.5 bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-xl relative select-none">
-      {/* Top Ambient Glow Beam */}
+    <div className="w-full shrink-0 rounded-2xl p-2.5 sm:p-3 bg-slate-50/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 relative select-none">
+      {/* Dynamic Fund Color Accent Line */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300"
         style={{
@@ -82,7 +82,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       />
 
       {/* Header: Title & Grounding Beacon */}
-      <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-white/10">
+      <div className="flex items-center justify-between pb-1.5 border-b border-slate-200/60 dark:border-white/10">
         <div className="flex items-center gap-2">
           <div
             className="w-6 h-6 rounded-lg flex items-center justify-center border transition-colors duration-200"

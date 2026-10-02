@@ -201,9 +201,12 @@ export default function App() {
         </section>
 
         {/* Right Column (42% width): Scheme Explorer & Live NAV Telemetry */}
-        <section className={`w-full lg:w-[42%] flex-col gap-3.5 overflow-y-auto max-h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] pr-1.5 scroll-smooth ${
+        <section className={`w-full lg:w-[42%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3.5 sm:p-4.5 relative overflow-hidden h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] justify-between ${
           mobileTab === 'schemes' ? 'flex' : 'hidden lg:flex'
         }`}>
+          {/* Top Neon Edge Accent */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 shadow-[0_0_12px_#38bdf8]" />
+
           {/* Interactive Animated Financial NAV Graph */}
           <TelemetryCard
             isLoading={isLoading}
