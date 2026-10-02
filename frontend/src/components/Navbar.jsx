@@ -49,7 +49,7 @@ export default function Navbar({
             title="What questions can you ask?"
           >
             <HelpCircle className="w-3.5 h-3.5 text-sky-400" />
-            <span className="hidden xs:inline">What to Ask?</span>
+            <span className="hidden sm:inline">What to Ask?</span>
           </button>
 
           {/* Sources Explorer Button */}

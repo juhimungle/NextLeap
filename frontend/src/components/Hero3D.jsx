@@ -29,31 +29,31 @@ function FloatingFinanceSphere({ isDark, reduceMotion }) {
 
   return (
     <group>
-      <ambientLight intensity={isDark ? 0.7 : 0.9} />
-      <directionalLight position={[5, 5, 5]} intensity={isDark ? 1.2 : 1.5} />
-      <pointLight position={[-5, -5, -5]} intensity={0.5} color="#818cf8" />
+      <ambientLight intensity={isDark ? 0.8 : 1.0} />
+      <directionalLight position={[5, 5, 5]} intensity={isDark ? 1.4 : 1.6} />
+      <pointLight position={[-4, -4, -4]} intensity={0.6} color="#818cf8" />
 
-      <Float speed={reduceMotion ? 0 : 2} rotationIntensity={reduceMotion ? 0 : 0.8} floatIntensity={reduceMotion ? 0 : 1}>
-        {/* Core Distorted Sphere */}
-        <Sphere ref={meshRef} args={[1.2, 64, 64]}>
+      <Float speed={reduceMotion ? 0 : 2} rotationIntensity={reduceMotion ? 0 : 0.5} floatIntensity={reduceMotion ? 0 : 0.6}>
+        {/* Core Distorted Financial Sphere - Scaled to stay safely within viewport */}
+        <Sphere ref={meshRef} args={[0.85, 48, 48]}>
           <MeshDistortMaterial
             color={sphereColor}
             wireframe
-            distort={reduceMotion ? 0 : 0.25}
-            speed={reduceMotion ? 0 : 1.5}
+            distort={reduceMotion ? 0 : 0.2}
+            speed={reduceMotion ? 0 : 1.2}
             roughness={0.2}
           />
         </Sphere>
 
-        {/* Outer Orbiting Ring 1 */}
+        {/* Outer Orbiting Ring 1 - Contained within canvas frustum */}
         <mesh ref={ringRef1} rotation={[Math.PI / 4, 0, 0]}>
-          <torusGeometry args={[2.0, 0.02, 16, 100]} />
+          <torusGeometry args={[1.35, 0.018, 16, 80]} />
           <meshStandardMaterial color={ringColor} emissive={ringColor} emissiveIntensity={0.6} />
         </mesh>
 
-        {/* Outer Orbiting Ring 2 */}
+        {/* Outer Orbiting Ring 2 - Contained within canvas frustum */}
         <mesh ref={ringRef2} rotation={[-Math.PI / 3, Math.PI / 6, 0]}>
-          <torusGeometry args={[2.3, 0.015, 16, 100]} />
+          <torusGeometry args={[1.55, 0.014, 16, 80]} />
           <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.5} />
         </mesh>
       </Float>
@@ -64,11 +64,11 @@ function FloatingFinanceSphere({ isDark, reduceMotion }) {
 // Fallback component for WebGL unsupported or error state
 function FallbackHero({ isDark }) {
   return (
-    <div className="w-full h-full flex items-center justify-center relative">
-      <div className={`w-40 h-40 rounded-full filter blur-2xl opacity-70 animate-pulse ${
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
+      <div className={`w-28 h-28 rounded-full filter blur-xl opacity-70 animate-pulse ${
         isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/40'
       }`} />
-      <div className={`absolute w-32 h-32 rounded-full border-2 border-dashed animate-spin ${
+      <div className={`absolute w-24 h-24 rounded-full border-2 border-dashed animate-spin ${
         isDark ? 'border-indigo-400/50' : 'border-indigo-600/50'
       }`} style={{ animationDuration: '20s' }} />
     </div>
@@ -93,9 +93,9 @@ export default function Hero3D({ isDark = true, reduceMotion = false }) {
   }
 
   return (
-    <div className="w-full h-full min-h-[180px] md:min-h-[260px] relative pointer-events-none select-none">
+    <div className="w-full h-full relative overflow-hidden pointer-events-none select-none flex items-center justify-center">
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
+        camera={{ position: [0, 0, 4.8], fov: 42 }}
         dpr={[1, 1.5]}
         gl={{ powerPreference: 'low-power', antialias: true }}
       >
