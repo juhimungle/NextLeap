@@ -95,22 +95,22 @@ export default function App() {
       {/* Living Aurora Mesh Motion (Pure GPU-accelerated CSS) */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {/* Top-Center Indigo/Violet Nebula */}
-        <div className={`absolute -top-40 left-1/2 w-[880px] h-[580px] rounded-full filter blur-[140px] animate-aurora-1 transition-colors duration-150 ${
+        <div className={`absolute -top-40 left-1/2 w-[340px] sm:w-[880px] h-[340px] sm:h-[580px] rounded-full filter blur-[60px] sm:blur-[140px] animate-aurora-1 transition-colors duration-150 ${
           isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/35'
         }`} />
 
         {/* Left Electric Cyan/Sky Wave */}
-        <div className={`absolute top-1/4 -left-36 w-[640px] h-[640px] rounded-full filter blur-[160px] animate-aurora-2 transition-colors duration-150 ${
+        <div className={`absolute top-1/4 -left-36 w-[280px] sm:w-[640px] h-[280px] sm:h-[640px] rounded-full filter blur-[60px] sm:blur-[160px] animate-aurora-2 transition-colors duration-150 ${
           isDark ? 'bg-sky-600/30' : 'bg-sky-400/30'
         }`} />
 
         {/* Right Emerald/Teal Wealth Glow */}
-        <div className={`absolute top-1/3 -right-36 w-[600px] h-[600px] rounded-full filter blur-[150px] animate-aurora-3 transition-colors duration-150 ${
+        <div className={`absolute top-1/3 -right-36 w-[280px] sm:w-[600px] h-[280px] sm:h-[600px] rounded-full filter blur-[60px] sm:blur-[150px] animate-aurora-3 transition-colors duration-150 ${
           isDark ? 'bg-emerald-500/25' : 'bg-emerald-400/30'
         }`} />
 
         {/* Bottom Ambient Golden Amber Accent */}
-        <div className={`absolute -bottom-32 left-1/3 w-[520px] h-[450px] rounded-full filter blur-[170px] opacity-25 animate-pulse transition-colors duration-150 ${
+        <div className={`absolute -bottom-32 left-1/3 w-[260px] sm:w-[520px] h-[260px] sm:h-[450px] rounded-full filter blur-[60px] sm:blur-[170px] opacity-25 animate-pulse transition-colors duration-150 ${
           isDark ? 'bg-amber-500/20' : 'bg-amber-300/25'
         }`} />
       </div>
@@ -159,7 +159,7 @@ export default function App() {
       {/* Main Content Container - Split-Screen Command Center */}
       <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-2 sm:py-3 flex flex-col lg:flex-row gap-4 sm:gap-5">
         {/* Left Column (58% width): AI Fact Assistant Workspace */}
-        <section className={`flex-1 lg:w-[58%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3.5 sm:p-5 relative overflow-hidden h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] ${
+        <section className={`flex-1 lg:w-[58%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-md sm:backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3.5 sm:p-5 relative overflow-hidden h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] ${
           mobileTab === 'assistant' ? 'flex' : 'hidden lg:flex'
         }`}>
           {/* Top Neon Edge Accent */}
@@ -211,7 +211,7 @@ export default function App() {
         </section>
 
         {/* Right Column (42% width): Scheme Explorer & Live NAV Telemetry */}
-        <section className={`w-full lg:w-[42%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3 sm:p-4.5 relative h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] overflow-y-auto lg:overflow-hidden lg:justify-between scrollbar-none gap-3 lg:gap-0 ${
+        <section className={`w-full lg:w-[42%] flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-md sm:backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-3 sm:p-4.5 relative h-[calc(100dvh-10.5rem)] lg:h-[calc(100vh-6.5rem)] min-h-[480px] overflow-y-auto lg:overflow-hidden lg:justify-between scrollbar-none gap-3 lg:gap-0 ${
           mobileTab === 'schemes' ? 'flex' : 'hidden lg:flex'
         }`}>
           {/* Top Neon Edge Accent */}

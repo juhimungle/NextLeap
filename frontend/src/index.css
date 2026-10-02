@@ -8,18 +8,35 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Superfast Snappy Theme Transition (Zero GPU/DOM Lag) */
-  html,
-  body,
-  header,
-  main,
-  section,
-  nav,
-  button,
-  input,
-  .glass-panel,
-  .glass-card {
-    transition: background-color 140ms ease-out, border-color 140ms ease-out, color 140ms ease-out;
+  /* Desktop: Snappy smooth 120ms surface transition */
+  @media (min-width: 641px) {
+    html,
+    body,
+    header,
+    main,
+    section,
+    nav {
+      transition: background-color 120ms ease-out, border-color 120ms ease-out, color 120ms ease-out;
+    }
+  }
+
+  /* Mobile: Instant 0ms Native App Response (Zero GPU/CPU Lag) */
+  @media (max-width: 640px) {
+    html,
+    body,
+    header,
+    main,
+    section,
+    nav,
+    div,
+    button,
+    span,
+    p,
+    h1,
+    h2,
+    h3 {
+      transition: none !important;
+    }
   }
 }
 
