@@ -124,8 +124,14 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
                   : 'border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-slate-950/40 hover:border-slate-300 dark:hover:border-slate-500 hover:shadow-md active:scale-[0.98]'
               }`}
             >
-              {/* Top Accent Gradient Line */}
-              <div className={`absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r ${scheme.topGradient}`} />
+              {/* Top Accent Ambient Glow (Inset with soft fading so it never overflows rounded corners) */}
+              <div
+                className="absolute top-0 left-6 right-6 h-[1.5px] rounded-full transition-opacity duration-300 opacity-60 group-hover:opacity-100 pointer-events-none"
+                style={{
+                  background: `linear-gradient(90deg, transparent, ${scheme.sparklineColor}, transparent)`,
+                  boxShadow: `0 0 10px ${scheme.sparklineColor}`
+                }}
+              />
 
               {/* Card Top: Icon, Name & Tag */}
               <div>
