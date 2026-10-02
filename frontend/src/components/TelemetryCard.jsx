@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cpu, ShieldCheck, Database, CheckCircle2, Zap, Lock, Activity, TrendingUp, Sparkles, PieChart } from 'lucide-react';
 
 const SCHEME_CHARTS = {
@@ -92,6 +92,13 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
   );
   const [viewMode, setViewMode] = useState('trajectory'); // 'trajectory' | 'allocation'
 
+  // Two-way sync: Update active visualizer tab whenever user clicks a Scheme Card in the directory
+  useEffect(() => {
+    if (selectedScheme && SCHEME_CHARTS[selectedScheme]) {
+      setActiveTab(selectedScheme);
+    }
+  }, [selectedScheme]);
+
   const currentChart = SCHEME_CHARTS[activeTab] || SCHEME_CHARTS["HDFC Flexi Cap Fund"];
 
   const handleTabClick = (key) => {
@@ -101,7 +108,6 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
 
   // Circumference for Donut (R = 26)
   const donutCircumference = 2 * Math.PI * 26; // ~163.36
-  let cumulativeOffset = 0;
 
   return (
     <div className="w-full shrink-0 rounded-2xl p-2.5 sm:p-3 bg-slate-50/70 dark:bg-slate-950/40 border border-slate-200/80 dark:border-white/5 relative select-none">
@@ -252,26 +258,29 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
             {/* SVG Animated Donut */}
             <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 72 72" className="w-full h-full -rotate-90 transform">
-                {currentChart.allocation.map((item) => {
-                  const dashArray = `${(item.pct / 100) * donutCircumference} ${donutCircumference}`;
-                  const strokeOffset = -((cumulativeOffset / 100) * donutCircumference);
-                  cumulativeOffset += item.pct;
+                {(() => {
+                  let offsetAccumulator = 0;
+                  return currentChart.allocation.map((item) => {
+                    const dashArray = `${(item.pct / 100) * donutCircumference} ${donutCircumference}`;
+                    const strokeOffset = -((offsetAccumulator / 100) * donutCircumference);
+                    offsetAccumulator += item.pct;
 
-                  return (
-                    <circle
-                      key={item.name}
-                      cx="36"
-                      cy="36"
-                      r="26"
-                      fill="transparent"
-                      stroke={item.color}
-                      strokeWidth="9"
-                      strokeDasharray={dashArray}
-                      strokeDashoffset={strokeOffset}
-                      className="transition-all duration-700 ease-out"
-                    />
-                  );
-                })}
+                    return (
+                      <circle
+                        key={item.name}
+                        cx="36"
+                        cy="36"
+                        r="26"
+                        fill="transparent"
+                        stroke={item.color}
+                        strokeWidth="9"
+                        strokeDasharray={dashArray}
+                        strokeDashoffset={strokeOffset}
+                        className="transition-all duration-700 ease-out"
+                      />
+                    );
+                  });
+                })()}
               </svg>
               {/* Donut Center Core Metric */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
