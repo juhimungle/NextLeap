@@ -1,8 +1,8 @@
 services:
   - type: web
-    name: facts-only-mf-assistant
+    name: mf-facts-assistant
     runtime: python
-    buildCommand: "cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt && python scripts/ingest.py"
+    buildCommand: "pip install -r backend/requirements.txt"
     startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: GROQ_API_KEY
