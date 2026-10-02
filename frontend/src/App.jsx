@@ -127,9 +127,13 @@ export default function App() {
                 <Cpu className="w-3.5 h-3.5" />
                 <span>3D RAG Telemetry</span>
               </span>
-              <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
-                <span>Active Core</span>
+              <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border transition-all ${
+                isLoading
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50 animate-pulse'
+                  : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${isLoading ? 'bg-emerald-300 animate-ping' : 'bg-emerald-400'}`} />
+                <span>{isLoading ? "Searching RAG..." : "Active Core"}</span>
               </span>
             </div>
 
@@ -138,7 +142,7 @@ export default function App() {
               <Suspense fallback={
                 <div className="w-16 h-16 rounded-full border-2 border-dashed border-indigo-400/40 animate-spin" />
               }>
-                <Hero3D isDark={isDark} reduceMotion={reduceMotion} />
+                <Hero3D isDark={isDark} reduceMotion={reduceMotion} isLoading={isLoading} />
               </Suspense>
             </div>
 
