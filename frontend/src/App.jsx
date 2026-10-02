@@ -107,30 +107,30 @@ export default function App() {
       {/* Main Content Container - Split-Screen Command Center */}
       <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-3 flex flex-col lg:flex-row gap-5">
         {/* Left Column (58% width): AI Fact Assistant Workspace */}
-        <section className="flex-1 lg:w-[58%] flex flex-col rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 shadow-2xl p-4 sm:p-5 relative overflow-hidden min-h-[620px] lg:h-[calc(100vh-6.5rem)]">
+        <section className="flex-1 lg:w-[58%] flex flex-col rounded-3xl bg-white dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200 dark:border-white/10 shadow-lg dark:shadow-2xl p-4 sm:p-5 relative overflow-hidden min-h-[620px] lg:h-[calc(100vh-6.5rem)]">
           {/* Top Neon Edge Accent */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500 shadow-[0_0_12px_#00D09C]" />
 
           {/* Workspace Title & Trust Bar */}
-          <div className="flex items-center justify-between pb-3 mb-2 border-b border-white/10 shrink-0">
+          <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-200 dark:border-white/10 shrink-0">
             <div>
               <div className="flex items-center gap-2">
                 <HeroDisclaimerBadge />
-                <span className="text-[11px] font-mono text-emerald-400 font-bold hidden sm:inline">
+                <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold hidden sm:inline">
                   • 100% Grounded
                 </span>
               </div>
-              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white mt-1">
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white mt-1">
                 FACTS-ONLY MUTUAL FUND ASSISTANT
               </h1>
-              <p className="text-xs text-slate-300 font-normal">
+              <p className="text-xs text-slate-600 dark:text-slate-300 font-normal">
                 Directly interrogates official HDFC AMC SIDs & SEBI guidelines. Strict zero advice.
               </p>
             </div>
 
-            <div className="hidden sm:flex items-center gap-1.5 font-mono text-[10px] text-slate-400">
-              <span className="px-2 py-0.5 rounded bg-slate-800 border border-white/5 text-emerald-300">24 SIDs</span>
-              <span className="px-2 py-0.5 rounded bg-slate-800 border border-white/5 text-sky-300">563 Chunks</span>
+            <div className="hidden sm:flex items-center gap-1.5 font-mono text-[10px] text-slate-500 dark:text-slate-400">
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/5 text-emerald-700 dark:text-emerald-300 font-medium">24 SIDs</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/5 text-sky-700 dark:text-sky-300 font-medium">563 Chunks</span>
             </div>
           </div>
 
@@ -146,7 +146,7 @@ export default function App() {
           </div>
 
           {/* Pinned Input Bar at Bottom of Workspace */}
-          <div className="pt-2 border-t border-white/10 mt-auto shrink-0">
+          <div className="pt-2 border-t border-slate-200 dark:border-white/10 mt-auto shrink-0">
             <InputBar
               onSendMessage={handleSendMessage}
               isLoading={isLoading}

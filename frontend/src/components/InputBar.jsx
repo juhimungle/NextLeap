@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send, Trash2, CornerDownLeft, Sparkles, Search } from 'lucide-react';
 
 const QUICK_PROMPTS = [
@@ -38,12 +38,12 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
 
   return (
     <div className="w-full flex flex-col gap-2.5">
-      {/* Prominent High-Visibility Search & Chat Box (Front and Center) */}
+      {/* Prominent Search & Chat Box */}
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="relative rounded-2xl bg-slate-900/90 border-2 border-indigo-500/40 hover:border-indigo-400 focus-within:border-[#00D09C] focus-within:ring-4 focus-within:ring-[#00D09C]/15 transition-all duration-200 p-3 sm:p-4 shadow-[0_0_35px_rgba(99,102,241,0.2)]">
+        <div className="relative rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-300 dark:border-indigo-500/40 hover:border-indigo-400 focus-within:border-[#00D09C] focus-within:ring-3 focus-within:ring-[#00D09C]/20 transition-all duration-200 p-3 shadow-xs dark:shadow-[0_0_35px_rgba(99,102,241,0.2)]">
           <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0 mt-0.5">
-              <Search className="w-4 h-4 text-sky-400" />
+            <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center shrink-0 mt-0.5">
+              <Search className="w-4 h-4 text-indigo-600 dark:text-sky-400" />
             </div>
 
             <div className="flex-1">
@@ -53,15 +53,15 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
                 value={text}
                 onChange={(e) => setText(e.target.value.slice(0, maxLength))}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask any factual question (e.g., 'What is the exit load of HDFC Flexi Cap Fund?' or 'What is the ELSS lock-in period?')..."
+                placeholder="Ask any factual question (e.g. 'What is the exit load of HDFC Flexi Cap Fund?')..."
                 disabled={isLoading}
-                className="w-full bg-transparent resize-none text-sm sm:text-base text-slate-100 placeholder-slate-400 focus:outline-none scrollbar-none font-sans leading-relaxed"
+                className="w-full bg-transparent resize-none text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400 focus:outline-none scrollbar-none font-sans leading-relaxed"
               />
 
-              <div className="flex items-center justify-between pt-2 mt-1 border-t border-white/10 text-xs">
+              <div className="flex items-center justify-between pt-2 mt-1 border-t border-slate-200 dark:border-white/10 text-xs">
                 <div className="flex items-center gap-3">
                   <span className={`text-[11px] font-mono font-medium ${
-                    text.length > 450 ? 'text-amber-400 font-bold' : 'text-slate-400'
+                    text.length > 450 ? 'text-amber-500 font-bold' : 'text-slate-400'
                   }`}>
                     {text.length}/{maxLength}
                   </span>
@@ -70,7 +70,7 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
                     <button
                       type="button"
                       onClick={onClearChat}
-                      className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-rose-400 transition-colors duration-150 active:scale-95 cursor-pointer font-medium"
+                      className="flex items-center gap-1.5 text-[11px] text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 transition-colors duration-150 active:scale-95 cursor-pointer font-medium"
                       title="Clear conversation"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -82,7 +82,7 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
                 <div className="flex items-center gap-2">
                   <span className="hidden sm:flex items-center gap-1 text-[10px] text-slate-400 font-mono">
                     <span>Press</span>
-                    <kbd className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-semibold inline-flex items-center gap-0.5">
+                    <kbd className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 font-semibold inline-flex items-center gap-0.5">
                       <span>Enter</span>
                       <CornerDownLeft className="w-2.5 h-2.5" />
                     </kbd>
@@ -91,7 +91,7 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
                   <button
                     type="submit"
                     disabled={!text.trim() || isLoading}
-                    className="flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 via-[#00D09C] to-teal-400 text-slate-950 font-bold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                    className="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 via-[#00D09C] to-teal-400 text-slate-950 font-bold text-xs shadow-md shadow-emerald-500/25 hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
                   >
                     <span>{isLoading ? 'Verifying...' : 'Ask Assistant'}</span>
                     <Send className="w-3.5 h-3.5" />
@@ -105,7 +105,7 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
 
       {/* 1-Click Quick Prompt Chips */}
       <div className="w-full flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 shrink-0 flex items-center gap-1 pl-1 font-mono">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1 pl-1 font-mono">
           <Sparkles className="w-3 h-3 text-[#00D09C]" />
           <span>Quick Ask:</span>
         </span>
@@ -115,7 +115,7 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
             type="button"
             disabled={isLoading}
             onClick={() => handleQuickPrompt(qp.query)}
-            className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/40 transition-all duration-100 ease-out active:scale-95 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none shadow-xs"
+            className="shrink-0 text-[11px] font-medium px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-emerald-500/20 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-emerald-300 border border-slate-200 dark:border-white/10 transition-all duration-100 ease-out active:scale-95 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed select-none shadow-xs"
             title={qp.query}
           >
             {qp.label}
