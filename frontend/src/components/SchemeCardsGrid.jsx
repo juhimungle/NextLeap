@@ -118,101 +118,57 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
             <div
               key={scheme.id}
               onClick={() => onSelectScheme(scheme.id)}
-              className={`group relative rounded-2xl p-3 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none overflow-hidden ${
+              className={`group relative rounded-2xl p-2.5 sm:p-3 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none overflow-hidden ${
                 isSelected
                   ? 'border-[#00D09C] bg-white dark:bg-slate-900/95 shadow-md dark:shadow-[0_0_24px_rgba(0,208,156,0.22)] ring-1 ring-[#00D09C]/60 scale-[1.01]'
                   : 'border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/80 hover:border-slate-300 dark:hover:border-slate-500 hover:shadow-md active:scale-[0.98]'
               }`}
             >
               {/* Top Accent Gradient Line */}
-              <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${scheme.topGradient}`} />
+              <div className={`absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r ${scheme.topGradient}`} />
 
-              {/* Card Top: Icon & Tags */}
+              {/* Card Top: Icon, Name & Tag */}
               <div>
-                <div className="flex items-start justify-between gap-1.5 mb-1.5 pt-0.5">
-                  <div className={`w-7 h-7 rounded-xl flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150`}>
-                    <Icon className="w-3.5 h-3.5" />
+                <div className="flex items-center justify-between gap-1 mb-1 pt-0.5">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center bg-gradient-to-br ${scheme.accentColor} border shadow-xs group-hover:scale-105 transition-transform duration-150 shrink-0`}>
+                      <Icon className="w-3 h-3" />
+                    </div>
+                    <h3 className="text-xs sm:text-[13px] font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight truncate">
+                      {scheme.name}
+                    </h3>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${scheme.badgeBg}`}>
+                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full border shrink-0 ${scheme.badgeBg}`}>
                     {scheme.tag}
                   </span>
                 </div>
 
-                {/* Scheme Title & Mini Sparkline Growth Graph */}
-                <div className="flex items-baseline justify-between gap-1 mb-0.5">
-                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#00D09C] transition-colors duration-150 leading-tight">
-                    {scheme.name}
-                  </h3>
-                </div>
-
+                {/* Category & Sparkline in 1 tight row */}
                 <div className="flex items-center justify-between gap-1 mb-1.5">
-                  <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate">
                     {scheme.category}
                   </p>
-                  {/* Groww Style Mini NAV Growth Sparkline */}
-                  <svg viewBox="0 0 70 20" className="w-12 h-3.5 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <svg viewBox="0 0 70 20" className="w-11 h-3 overflow-visible shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
                     <path d={scheme.sparklineArea} fill={`${scheme.sparklineColor}25`} />
                     <path d={scheme.sparklinePath} fill="none" stroke={scheme.sparklineColor} strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </div>
 
-                {/* Key Verified Facts Grid with 1-Click Metric Queries */}
-                <div className="grid grid-cols-2 gap-2 py-2 border-t border-b border-slate-100 dark:border-white/5 text-[11px] font-mono">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectScheme(scheme.id);
-                      onAskQuestion(scheme.minSipQuery);
-                    }}
-                    title={`Click to query Min SIP for ${scheme.name}`}
-                    className="flex flex-col text-left p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer group/metric"
-                  >
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 font-sans group-hover/metric:text-emerald-500">
-                      <Coins className="w-2.5 h-2.5" />
-                      Min SIP
-                    </span>
-                    <span className="font-bold text-slate-900 dark:text-slate-100 group-hover/metric:text-[#00D09C]">{scheme.minSip}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectScheme(scheme.id);
-                      onAskQuestion(scheme.exitLoadQuery);
-                    }}
-                    title={`Click to query Exit Load for ${scheme.name}`}
-                    className="flex flex-col text-left p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer group/metric"
-                  >
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 font-sans group-hover/metric:text-emerald-500">
-                      <Clock className="w-2.5 h-2.5" />
-                      Exit Load
-                    </span>
-                    <span className="font-bold text-slate-900 dark:text-slate-100 truncate group-hover/metric:text-[#00D09C]">{scheme.exitLoad}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectScheme(scheme.id);
-                      onAskQuestion(scheme.benchmarkQuery);
-                    }}
-                    title={`Click to query Benchmark for ${scheme.name}`}
-                    className="flex flex-col col-span-2 pt-1 border-t border-slate-100 dark:border-white/5 text-left p-1 rounded hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer group/metric"
-                  >
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans group-hover/metric:text-emerald-500">Benchmark</span>
-                    <span className="font-semibold text-slate-800 dark:text-slate-200 truncate text-[10px] group-hover/metric:text-[#00D09C]">{scheme.benchmark}</span>
-                  </button>
+                {/* Key Verified Facts Grid */}
+                <div className="grid grid-cols-2 gap-1 py-1 px-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-white/5 text-[10px] font-mono">
+                  <div className="truncate">
+                    <span className="text-slate-400 text-[9px] font-sans">SIP:</span> <strong className="text-slate-900 dark:text-slate-100 font-bold">{scheme.minSip}</strong>
+                  </div>
+                  <div className="truncate text-right">
+                    <span className="text-slate-400 text-[9px] font-sans">Exit:</span> <strong className="text-slate-900 dark:text-slate-100">{scheme.exitLoad}</strong>
+                  </div>
                 </div>
               </div>
 
-              {/* Card Footer: 1-Click Ask Button */}
-              <div className="pt-1.5 mt-0.5 flex items-center justify-between">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3 text-[#00D09C]" />
-                  <span>SID Grounded</span>
+              {/* Card Footer: Benchmark & 1-Click Ask Button */}
+              <div className="pt-1.5 mt-1 flex items-center justify-between border-t border-slate-100 dark:border-white/5">
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 truncate max-w-[130px] font-mono" title={scheme.benchmark}>
+                  {scheme.benchmark}
                 </span>
 
                 <button
@@ -223,11 +179,11 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
                     onSelectScheme(scheme.id);
                     onAskQuestion(scheme.sampleQuery);
                   }}
-                  className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-[#00D09C]/15 hover:bg-[#00D09C] text-emerald-700 dark:text-[#00D09C] hover:text-slate-950 border border-[#00D09C]/30 text-[11px] font-bold transition-all duration-100 ease-out active:scale-95 cursor-pointer shadow-xs disabled:opacity-40"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#00D09C]/15 hover:bg-[#00D09C] text-emerald-700 dark:text-[#00D09C] hover:text-slate-950 border border-[#00D09C]/30 text-[10px] font-bold transition-all duration-100 ease-out active:scale-95 cursor-pointer shadow-xs shrink-0 disabled:opacity-40"
                   title="Query all facts for this scheme"
                 >
                   <span>Query</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <ArrowRight className="w-2.5 h-2.5" />
                 </button>
               </div>
             </div>

@@ -137,9 +137,9 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Live Animated Financial Area Graph */}
-      <div className="relative mt-2 pt-1 pb-1 px-2 rounded-xl bg-slate-50/80 dark:bg-transparent border border-slate-200 dark:border-white/5 overflow-hidden">
+      <div className="relative mt-1.5 pt-0.5 pb-0.5 px-2 rounded-xl bg-slate-50/80 dark:bg-transparent border border-slate-200 dark:border-white/5 overflow-hidden">
         {/* Dynamic SVG Animated Chart */}
-        <svg viewBox="0 0 380 90" className="w-full h-20 overflow-visible relative z-10">
+        <svg viewBox="0 0 380 90" className="w-full h-14 sm:h-16 overflow-visible relative z-10">
           <defs>
             <linearGradient id={currentChart.gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor={currentChart.color} stopOpacity="0.45" />
@@ -185,7 +185,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
         </svg>
 
         {/* Graph Overlay Telemetry Badges */}
-        <div className="flex items-center justify-between text-[10px] font-mono pt-1 text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-white/5">
+        <div className="flex items-center justify-between text-[10px] font-mono pt-0.5 text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-white/5">
           <span className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currentChart.color }} />
             <span className="font-bold text-slate-900 dark:text-slate-200">{currentChart.name}</span>
@@ -198,18 +198,18 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* RAG Engine Operational Guarantee Matrix */}
-      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-2 text-xs font-mono">
-        <div className="p-1.5 sm:p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5 sm:gap-1">
+      <div className="grid grid-cols-2 gap-1 mt-1.5 text-xs font-mono">
+        <div className="p-1 sm:p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5">
           <div className="flex items-center gap-1.5">
-            <Database className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400 shrink-0" />
+            <Database className="w-3 h-3 text-sky-500 dark:text-sky-400 shrink-0" />
             <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium">24 SIDs</span>
           </div>
           <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">0 Aggregators</span>
         </div>
 
-        <div className="p-1.5 sm:p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5 sm:gap-1">
+        <div className="p-1 sm:p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5">
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0" />
+            <ShieldCheck className="w-3 h-3 text-emerald-500 dark:text-emerald-400 shrink-0" />
             <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium">SEBI Compliant</span>
           </div>
           <span className="text-[10px] text-amber-600 dark:text-amber-300 font-bold">0 Advice</span>
