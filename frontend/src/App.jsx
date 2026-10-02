@@ -119,15 +119,20 @@ export default function App() {
             </p>
           </div>
 
-          {/* 3D Visual Hero Hologram Card - Framed to eliminate overflow */}
-          <div className="w-full md:w-80 lg:w-96 rounded-2xl glass-card border border-white/10 p-3 shadow-xl flex flex-col justify-between relative overflow-hidden shrink-0">
+          {/* 3D Visual Hero Hologram Card - Framed to eliminate overflow with Pro Neon Edge Beam */}
+          <div className="w-full md:w-80 lg:w-96 rounded-3xl bg-gradient-to-b from-[#0f172a]/95 via-[#0b1322]/95 to-[#060b14]/98 border border-white/10 p-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_24px_rgba(16,185,129,0.08)] flex flex-col justify-between relative overflow-hidden shrink-0 group hover:border-emerald-500/30 transition-all duration-300">
+            {/* Top Glowing Neon Border Beam */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#10b981]" />
+            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-16 right-0 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+
             {/* Hologram Card Top Bar */}
-            <div className="flex items-center justify-between pb-2 border-b border-white/5 text-[11px] font-semibold text-slate-300">
+            <div className="flex items-center justify-between pb-2 border-b border-white/5 text-[11px] font-semibold text-slate-300 relative z-10">
               <span className="flex items-center gap-1.5 text-emerald-400 font-mono">
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span>Mutual Fund Telemetry</span>
               </span>
-              <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border transition-all ${
+              <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border transition-all ${
                 isLoading
                   ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50 animate-pulse'
                   : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
@@ -138,7 +143,7 @@ export default function App() {
             </div>
 
             {/* 3D Canvas Box */}
-            <div className="w-full h-32 sm:h-36 flex items-center justify-center relative overflow-hidden">
+            <div className="w-full h-36 sm:h-40 flex items-center justify-center relative overflow-hidden my-1">
               <Suspense fallback={
                 <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-400/40 animate-spin" />
               }>
@@ -147,12 +152,12 @@ export default function App() {
             </div>
 
             {/* Hologram Card Bottom Info */}
-            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400">
-              <span className="flex items-center gap-1">
+            <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400 relative z-10">
+              <span className="flex items-center gap-1 text-slate-300">
                 <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                 <span>4 Core Schemes</span>
               </span>
-              <span>563 Chunks • SEBI/AMFI</span>
+              <span className="text-slate-500">563 Chunks • SEBI/AMFI</span>
             </div>
           </div>
         </section>
@@ -169,9 +174,9 @@ export default function App() {
           disabled={isLoading}
         />
 
-        {/* Chat Card Container - Expands comfortably to fill the desktop workspace */}
+        {/* Chat Card Container - Expands comfortably with Pro Neon Edge Beam */}
         <div className="w-full flex-1 rounded-3xl glass-panel p-3 sm:p-5 lg:p-6 shadow-2xl flex flex-col border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent shadow-[0_0_12px_#6366f1]" />
           <ChatPanel
             messages={messages}
             isLoading={isLoading}

@@ -216,13 +216,19 @@ function MutualFundVisualizer({ isDark, reduceMotion, isLoading }) {
         {/* Dynamic Growth Trendline */}
         <GrowthTrendLine isLoading={isLoading} />
 
-        {/* Base Pedestal / Asset Allocation Ring */}
-        <mesh position={[0, -0.72, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[1.35, 0.016, 16, 80]} />
+        {/* 3D Holographic Grid Floor Platform */}
+        <gridHelper
+          args={[3.4, 10, "#10b981", "#1e293b"]}
+          position={[0, -0.73, 0]}
+        />
+
+        {/* Outer Circular Asset Allocation Ring */}
+        <mesh position={[0, -0.73, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[1.45, 0.016, 16, 80]} />
           <meshStandardMaterial
-            color="#334155"
+            color="#10b981"
             emissive="#10b981"
-            emissiveIntensity={0.35}
+            emissiveIntensity={isLoading ? 1.6 : 0.6}
           />
         </mesh>
       </Float>
