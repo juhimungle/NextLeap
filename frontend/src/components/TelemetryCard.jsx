@@ -13,7 +13,7 @@ const SCHEME_CHARTS = {
     path: "M 0 75 Q 40 70, 80 58 T 160 50 T 240 32 T 320 18 T 380 10",
     areaPath: "M 0 75 Q 40 70, 80 58 T 160 50 T 240 32 T 320 18 T 380 10 L 380 100 L 0 100 Z",
     tag: "Multi-Cap Trajectory",
-    verifiedChunks: "148 Chunks",
+    verifiedChunks: "86 Chunks",
     allocation: [
       { name: "Large Cap", pct: 71.2, color: "#00D09C" },
       { name: "Mid Cap", pct: 17.8, color: "#38bdf8" },
@@ -33,7 +33,7 @@ const SCHEME_CHARTS = {
     path: "M 0 80 Q 50 75, 100 65 T 190 52 T 280 35 T 380 18",
     areaPath: "M 0 80 Q 50 75, 100 65 T 190 52 T 280 35 T 380 18 L 380 100 L 0 100 Z",
     tag: "Bluechip Benchmark",
-    verifiedChunks: "136 Chunks",
+    verifiedChunks: "84 Chunks",
     allocation: [
       { name: "Large Cap", pct: 87.5, color: "#0284c7" },
       { name: "Mid Cap", pct: 8.9, color: "#38bdf8" },
@@ -53,7 +53,7 @@ const SCHEME_CHARTS = {
     path: "M 0 85 Q 45 80, 90 70 T 180 55 T 270 38 T 380 15",
     areaPath: "M 0 85 Q 45 80, 90 70 T 180 55 T 270 38 T 380 15 L 380 100 L 0 100 Z",
     tag: "3-Yr Lock-in Growth",
-    verifiedChunks: "142 Chunks",
+    verifiedChunks: "83 Chunks",
     allocation: [
       { name: "Large Cap", pct: 64.8, color: "#6366f1" },
       { name: "Mid Cap", pct: 21.4, color: "#38bdf8" },
@@ -73,7 +73,7 @@ const SCHEME_CHARTS = {
     path: "M 0 88 Q 40 82, 85 64 T 170 54 T 255 28 T 380 8",
     areaPath: "M 0 88 Q 40 82, 85 64 T 170 54 T 255 28 T 380 8 L 380 100 L 0 100 Z",
     tag: "High Growth Alpha",
-    verifiedChunks: "137 Chunks",
+    verifiedChunks: "102 Chunks",
     allocation: [
       { name: "Mid Cap", pct: 67.4, color: "#d97706" },
       { name: "Small Cap", pct: 17.1, color: "#fb923c" },
