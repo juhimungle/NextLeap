@@ -43,6 +43,20 @@ function GrowthBar({ position, height, color, capColor, delay, isLoading, label 
           emissiveIntensity={isLoading ? 2.5 : 1.2}
         />
       </mesh>
+
+      {/* 3D Scheme Name Label on Pillar */}
+      {label && (
+        <Text
+          position={[0, position[1] - height / 2 - 0.12, 0.16]}
+          fontSize={0.10}
+          color="#94a3b8"
+          anchorX="center"
+          anchorY="middle"
+          fontWeight="bold"
+        >
+          {label}
+        </Text>
+      )}
     </group>
   );
 }

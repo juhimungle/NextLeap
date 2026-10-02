@@ -1,6 +1,7 @@
 import React, { useState, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import SchemeSelector from './components/SchemeSelector';
+import SchemeCardsGrid from './components/SchemeCardsGrid';
 import ExampleQuestions from './components/ExampleQuestions';
 import ChatPanel from './components/ChatPanel';
 import InputBar from './components/InputBar';
@@ -143,15 +144,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* Scheme Selector */}
-        <SchemeSelector
+        {/* Scheme Directory Cards Grid (WealthTech / Groww Style) */}
+        <SchemeCardsGrid
           selectedScheme={selectedScheme}
           onSelectScheme={setSelectedScheme}
-        />
-
-        {/* Three Clickable Examples */}
-        <ExampleQuestions
-          onSelectQuestion={handleSendMessage}
+          onAskQuestion={handleSendMessage}
           disabled={isLoading}
         />
 
