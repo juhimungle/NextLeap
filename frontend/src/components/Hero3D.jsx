@@ -1,139 +1,247 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Sphere, MeshDistortMaterial, Sparkles, OrbitControls } from '@react-three/drei';
+import { Float, Sparkles, OrbitControls, Text } from '@react-three/drei';
+import * as THREE from 'three';
 
-function SatelliteNode({ radius, speed, color, offsetAngle = 0, isLoading }) {
-  const nodeRef = useRef();
+// 3D Ascending Growth Pillar Bar
+function GrowthBar({ position, height, color, capColor, delay, isLoading, label }) {
+  const meshRef = useRef();
+  const capRef = useRef();
 
   useFrame((state) => {
-    if (nodeRef.current) {
-      const t = state.clock.getElapsedTime() * (isLoading ? speed * 2.5 : speed) + offsetAngle;
-      nodeRef.current.position.x = Math.cos(t) * radius;
-      nodeRef.current.position.z = Math.sin(t) * radius;
-      nodeRef.current.position.y = Math.sin(t * 1.5) * 0.35;
+    if (meshRef.current && capRef.current) {
+      const t = state.clock.getElapsedTime();
+      // Subtle breathing pulse for mutual fund NAV growth
+      const wave = Math.sin(t * (isLoading ? 4 : 1.5) + delay) * (isLoading ? 0.15 : 0.05);
+      const targetScaleY = 1 + wave;
+      meshRef.current.scale.y = targetScaleY;
+      capRef.current.position.y = position[1] + (height / 2) * targetScaleY + 0.05;
     }
   });
 
   return (
-    <mesh ref={nodeRef}>
-      <sphereGeometry args={[0.07, 16, 16]} />
+    <group position={[position[0], 0, position[2]]}>
+      {/* Main Glass Bar Column */}
+      <mesh ref={meshRef} position={[0, position[1], 0]}>
+        <boxGeometry args={[0.28, height, 0.28]} />
+        <meshPhysicalMaterial
+          color={color}
+          transmission={0.4}
+          roughness={0.15}
+          metalness={0.2}
+          transparent
+          opacity={0.85}
+        />
+      </mesh>
+
+      {/* Glowing Neon Top Cap */}
+      <mesh ref={capRef} position={[0, position[1] + height / 2 + 0.05, 0]}>
+        <boxGeometry args={[0.3, 0.06, 0.3]} />
+        <meshStandardMaterial
+          color={capColor}
+          emissive={capColor}
+          emissiveIntensity={isLoading ? 2.5 : 1.2}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+// 3D Floating Rupee / Wealth Coin Token
+function WealthToken({ isLoading }) {
+  const tokenRef = useRef();
+
+  useFrame((state, delta) => {
+    if (tokenRef.current) {
+      const rotSpeed = isLoading ? 3.0 : 0.8;
+      tokenRef.current.rotation.y += delta * rotSpeed;
+    }
+  });
+
+  return (
+    <group ref={tokenRef} position={[0, 0.85, 0]}>
+      {/* Outer Coin Rim */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.38, 0.38, 0.06, 32]} />
+        <meshStandardMaterial
+          color="#10b981"
+          emissive="#059669"
+          emissiveIntensity={isLoading ? 1.5 : 0.6}
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
+
+      {/* Inner Accent Core */}
+      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.32, 0.32, 0.07, 32]} />
+        <meshStandardMaterial
+          color="#064e3b"
+          metalness={0.6}
+          roughness={0.3}
+        />
+      </mesh>
+
+      {/* Rupee Symbol ₹ (3D Text Facing Both Sides) */}
+      <Text
+        position={[0, 0, 0.04]}
+        fontSize={0.32}
+        color="#34d399"
+        anchorX="center"
+        anchorY="middle"
+        fontWeight="bold"
+      >
+        ₹
+      </Text>
+      <Text
+        position={[0, 0, -0.04]}
+        rotation={[0, Math.PI, 0]}
+        fontSize={0.32}
+        color="#34d399"
+        anchorX="center"
+        anchorY="middle"
+        fontWeight="bold"
+      >
+        ₹
+      </Text>
+    </group>
+  );
+}
+
+// 3D Ascending Growth Trendline Weaving Through Schemes
+function GrowthTrendLine({ isLoading }) {
+  const lineRef = useRef();
+
+  useFrame((state) => {
+    if (lineRef.current) {
+      const t = state.clock.getElapsedTime();
+      lineRef.current.material.emissiveIntensity = isLoading 
+        ? 1.8 + Math.sin(t * 8) * 0.6 
+        : 1.0 + Math.sin(t * 2) * 0.3;
+    }
+  });
+
+  // Curve connecting NAV progression of schemes
+  const curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-1.0, -0.4, 0.2),
+    new THREE.Vector3(-0.35, -0.05, 0.05),
+    new THREE.Vector3(0.35, 0.3, -0.1),
+    new THREE.Vector3(1.0, 0.75, -0.25)
+  ]);
+
+  return (
+    <mesh ref={lineRef}>
+      <tubeGeometry args={[curve, 32, 0.022, 8, false]} />
       <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={isLoading ? 2.0 : 1.2}
+        color="#34d399"
+        emissive="#10b981"
+        emissiveIntensity={1.2}
       />
     </mesh>
   );
 }
 
-function FloatingFinanceSphere({ isDark, reduceMotion, isLoading }) {
+// Main Mutual Fund 3D Scene
+function MutualFundVisualizer({ isDark, reduceMotion, isLoading }) {
   const groupRef = useRef();
-  const meshRef = useRef();
-  const ringRef1 = useRef();
-  const ringRef2 = useRef();
 
-  useFrame((state, delta) => {
-    // 1. Mouse-following inertia & tilt
+  useFrame((state) => {
     if (groupRef.current && !reduceMotion) {
-      const targetRotY = state.pointer.x * 0.45;
-      const targetRotX = -state.pointer.y * 0.35;
-      groupRef.current.rotation.y += (targetRotY - groupRef.current.rotation.y) * 0.05;
-      groupRef.current.rotation.x += (targetRotX - groupRef.current.rotation.x) * 0.05;
-    }
-
-    // 2. Active rotations (accelerated 3x when AI is searching)
-    const speedMult = isLoading ? 3.0 : 1.0;
-    if (!reduceMotion) {
-      if (meshRef.current) {
-        meshRef.current.rotation.y += delta * 0.25 * speedMult;
-        meshRef.current.rotation.x += delta * 0.15 * speedMult;
-      }
-      if (ringRef1.current) {
-        ringRef1.current.rotation.z += delta * 0.35 * speedMult;
-        ringRef1.current.rotation.x += delta * 0.2 * speedMult;
-      }
-      if (ringRef2.current) {
-        ringRef2.current.rotation.y += delta * 0.3 * speedMult;
-        ringRef2.current.rotation.z -= delta * 0.25 * speedMult;
-      }
+      const targetY = state.pointer.x * 0.45;
+      const targetX = -state.pointer.y * 0.35;
+      groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * 0.05;
+      groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * 0.05;
     }
   });
 
-  // Dynamic colors based on AI thinking state
-  const sphereColor = isLoading
-    ? "#10b981" // Emerald green when actively searching verified facts
-    : (isDark ? "#6366f1" : "#4f46e5");
-
-  const ring1Color = isLoading ? "#34d399" : (isDark ? "#38bdf8" : "#0284c7");
-  const ring2Color = isLoading ? "#06b6d4" : "#a855f7";
-
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} position={[0, -0.3, 0]}>
       <ambientLight intensity={isDark ? 0.9 : 1.1} />
-      <directionalLight position={[5, 5, 5]} intensity={isLoading ? 2.0 : 1.5} />
-      <pointLight position={[-4, -4, -4]} intensity={0.8} color={isLoading ? "#34d399" : "#818cf8"} />
+      <directionalLight position={[5, 6, 4]} intensity={isLoading ? 2.0 : 1.5} />
+      <pointLight position={[-4, 2, -2]} intensity={0.7} color="#34d399" />
+      <pointLight position={[0, 2, 2]} intensity={0.6} color="#38bdf8" />
 
-      {/* Floating Sparkle Field around the 3D core */}
+      {/* Floating Sparkles (Wealth Growth Dust) */}
       <Sparkles
-        count={isLoading ? 50 : 25}
-        scale={2.8}
+        count={isLoading ? 40 : 20}
+        scale={[3, 2, 2]}
         size={isLoading ? 3 : 1.8}
-        speed={isLoading ? 1.5 : 0.4}
-        color={isLoading ? "#10b981" : "#38bdf8"}
+        speed={isLoading ? 1.6 : 0.5}
+        color={isLoading ? "#34d399" : "#38bdf8"}
         opacity={0.6}
       />
 
-      <Float speed={reduceMotion ? 0 : (isLoading ? 4 : 2)} rotationIntensity={reduceMotion ? 0 : 0.4} floatIntensity={reduceMotion ? 0 : 0.5}>
-        {/* Core Distorted Financial Hologram */}
-        <Sphere ref={meshRef} args={[0.82, 48, 48]}>
-          <MeshDistortMaterial
-            color={sphereColor}
-            wireframe
-            distort={isLoading ? 0.4 : (reduceMotion ? 0 : 0.18)}
-            speed={isLoading ? 3.5 : (reduceMotion ? 0 : 1.2)}
-            roughness={0.2}
-          />
-        </Sphere>
+      <Float speed={reduceMotion ? 0 : (isLoading ? 3.5 : 1.8)} rotationIntensity={reduceMotion ? 0 : 0.3} floatIntensity={reduceMotion ? 0 : 0.4}>
+        {/* Central Floating Rupee Wealth Token */}
+        <WealthToken isLoading={isLoading} />
 
-        {/* Orbiting Ring 1 (AMC / SEBI Data Track) */}
-        <mesh ref={ringRef1} rotation={[Math.PI / 4, 0, 0]}>
-          <torusGeometry args={[1.32, 0.018, 16, 80]} />
+        {/* 4 Scheme Growth Pillars: ELSS, Flexi Cap, Large Cap, Mid-Cap */}
+        <GrowthBar
+          position={[-0.95, -0.35, 0.2]}
+          height={0.65}
+          color="#3b82f6"
+          capColor="#60a5fa"
+          delay={0}
+          isLoading={isLoading}
+          label="ELSS"
+        />
+        <GrowthBar
+          position={[-0.32, -0.2, 0.05]}
+          height={0.95}
+          color="#6366f1"
+          capColor="#818cf8"
+          delay={0.8}
+          isLoading={isLoading}
+          label="Flexi"
+        />
+        <GrowthBar
+          position={[0.32, -0.05, -0.1]}
+          height={1.25}
+          color="#0ea5e9"
+          capColor="#38bdf8"
+          delay={1.6}
+          isLoading={isLoading}
+          label="Large"
+        />
+        <GrowthBar
+          position={[0.95, 0.15, -0.25]}
+          height={1.65}
+          color="#10b981"
+          capColor="#34d399"
+          delay={2.4}
+          isLoading={isLoading}
+          label="Mid-Cap"
+        />
+
+        {/* Dynamic Growth Trendline */}
+        <GrowthTrendLine isLoading={isLoading} />
+
+        {/* Base Pedestal / Asset Allocation Ring */}
+        <mesh position={[0, -0.72, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[1.35, 0.016, 16, 80]} />
           <meshStandardMaterial
-            color={ring1Color}
-            emissive={ring1Color}
-            emissiveIntensity={isLoading ? 1.4 : 0.65}
+            color="#334155"
+            emissive="#10b981"
+            emissiveIntensity={0.35}
           />
         </mesh>
-
-        {/* Orbiting Ring 2 (AMFI Verification Track) */}
-        <mesh ref={ringRef2} rotation={[-Math.PI / 3, Math.PI / 6, 0]}>
-          <torusGeometry args={[1.52, 0.014, 16, 80]} />
-          <meshStandardMaterial
-            color={ring2Color}
-            emissive={ring2Color}
-            emissiveIntensity={isLoading ? 1.2 : 0.55}
-          />
-        </mesh>
-
-        {/* Satellite Telemetry Nodes (HDFC AMC, SEBI, AMFI streams) */}
-        <SatelliteNode radius={1.15} speed={0.8} color="#10b981" offsetAngle={0} isLoading={isLoading} />
-        <SatelliteNode radius={1.42} speed={0.6} color="#38bdf8" offsetAngle={Math.PI * 0.7} isLoading={isLoading} />
-        <SatelliteNode radius={1.65} speed={0.5} color="#c084fc" offsetAngle={Math.PI * 1.4} isLoading={isLoading} />
       </Float>
     </group>
   );
 }
 
-// Fallback component for WebGL unsupported or error state
+// Fallback for WebGL disabled or slow devices
 function FallbackHero({ isDark, isLoading }) {
   return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-      <div className={`w-28 h-28 rounded-full filter blur-xl opacity-70 animate-pulse ${
-        isLoading ? 'bg-emerald-500/50' : (isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/40')
-      }`} />
-      <div className={`absolute w-24 h-24 rounded-full border-2 border-dashed animate-spin ${
-        isLoading ? 'border-emerald-400' : (isDark ? 'border-indigo-400/50' : 'border-indigo-600/50')
-      }`} style={{ animationDuration: isLoading ? '6s' : '20s' }} />
+    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden">
+      <div className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl text-emerald-400 border border-emerald-500/30 ${
+        isLoading ? 'bg-emerald-500/20 animate-pulse' : 'bg-slate-800'
+      }`}>
+        ₹
+      </div>
+      <span className="text-[11px] font-mono text-slate-400 mt-2">
+        Mutual Fund NAV Visualizer
+      </span>
     </div>
   );
 }
@@ -158,15 +266,15 @@ export default function Hero3D({ isDark = true, reduceMotion = false, isLoading 
   return (
     <div className="w-full h-full relative overflow-hidden select-none flex items-center justify-center cursor-grab active:cursor-grabbing">
       <Canvas
-        camera={{ position: [0, 0, 4.6], fov: 42 }}
+        camera={{ position: [0, 0.5, 4.3], fov: 38 }}
         dpr={[1, 1.5]}
         gl={{ powerPreference: 'low-power', antialias: true }}
       >
-        <FloatingFinanceSphere isDark={isDark} reduceMotion={reduceMotion} isLoading={isLoading} />
+        <MutualFundVisualizer isDark={isDark} reduceMotion={reduceMotion} isLoading={isLoading} />
         <OrbitControls
           enableZoom={false}
           enablePan={false}
-          maxPolarAngle={Math.PI / 1.6}
+          maxPolarAngle={Math.PI / 1.7}
           minPolarAngle={Math.PI / 2.6}
           rotateSpeed={0.5}
         />

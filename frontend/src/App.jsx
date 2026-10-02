@@ -7,7 +7,7 @@ import InputBar from './components/InputBar';
 import SourcesModal from './components/SourcesModal';
 import GuideModal from './components/GuideModal';
 import { HeroDisclaimerBadge, FooterDisclaimer } from './components/DisclaimerBanner';
-import { Cpu, CheckCircle2 } from 'lucide-react';
+import { Cpu, CheckCircle2, TrendingUp } from 'lucide-react';
 
 // Lazy-load 3D Hero scene so chat and UI are interactive immediately
 const Hero3D = lazy(() => import('./components/Hero3D'));
@@ -123,9 +123,9 @@ export default function App() {
           <div className="w-full md:w-80 lg:w-96 rounded-2xl glass-card border border-white/10 p-3 shadow-xl flex flex-col justify-between relative overflow-hidden shrink-0">
             {/* Hologram Card Top Bar */}
             <div className="flex items-center justify-between pb-2 border-b border-white/5 text-[11px] font-semibold text-slate-300">
-              <span className="flex items-center gap-1.5 text-indigo-400 font-mono">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>3D RAG Telemetry</span>
+              <span className="flex items-center gap-1.5 text-emerald-400 font-mono">
+                <TrendingUp className="w-3.5 h-3.5" />
+                <span>Mutual Fund Telemetry</span>
               </span>
               <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border transition-all ${
                 isLoading
@@ -133,14 +133,14 @@ export default function App() {
                   : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
               }`}>
                 <span className={`w-1.5 h-1.5 rounded-full ${isLoading ? 'bg-emerald-300 animate-ping' : 'bg-emerald-400'}`} />
-                <span>{isLoading ? "Searching RAG..." : "Active Core"}</span>
+                <span>{isLoading ? "Searching RAG..." : "Live NAV Tracking"}</span>
               </span>
             </div>
 
             {/* 3D Canvas Box */}
             <div className="w-full h-32 sm:h-36 flex items-center justify-center relative overflow-hidden">
               <Suspense fallback={
-                <div className="w-16 h-16 rounded-full border-2 border-dashed border-indigo-400/40 animate-spin" />
+                <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-400/40 animate-spin" />
               }>
                 <Hero3D isDark={isDark} reduceMotion={reduceMotion} isLoading={isLoading} />
               </Suspense>
@@ -150,9 +150,9 @@ export default function App() {
             <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400">
               <span className="flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                <span>563 Chunks Indexed</span>
+                <span>4 Core Schemes</span>
               </span>
-              <span>24 Sources Whitelist</span>
+              <span>563 Chunks • SEBI/AMFI</span>
             </div>
           </div>
         </section>
