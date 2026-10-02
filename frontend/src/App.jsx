@@ -72,16 +72,22 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 ${
-      isDark ? 'bg-[#070a14] text-slate-100 dark' : 'bg-slate-100 text-slate-900 light'
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-300 relative ${
+      isDark ? 'bg-[#080d1a] text-slate-100 dark' : 'bg-slate-50 text-slate-900 light'
     }`}>
+      {/* Background Subtle Grid Texture */}
+      <div className="fixed inset-0 pointer-events-none bg-grid-pattern opacity-60 z-0" />
+
       {/* Background Aurora Glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className={`absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full filter blur-[120px] opacity-30 ${
+        <div className={`absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[550px] rounded-full filter blur-[140px] opacity-35 ${
           isDark ? 'bg-indigo-600' : 'bg-indigo-300'
         }`} />
-        <div className={`absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full filter blur-[140px] opacity-20 ${
+        <div className={`absolute top-1/4 -left-32 w-[550px] h-[550px] rounded-full filter blur-[160px] opacity-25 ${
           isDark ? 'bg-sky-600' : 'bg-sky-300'
+        }`} />
+        <div className={`absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full filter blur-[150px] opacity-20 ${
+          isDark ? 'bg-emerald-600' : 'bg-emerald-300'
         }`} />
       </div>
 
@@ -95,22 +101,23 @@ export default function App() {
       />
 
       {/* Main Content Container */}
-      <main className="relative z-10 flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-4 flex flex-col gap-4">
+      <main className="relative z-10 flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-4 flex flex-col gap-3">
         {/* Hero Section */}
-        <section className="w-full flex flex-col md:flex-row items-center justify-between gap-4 py-2">
+        <section className="w-full flex flex-col md:flex-row items-center justify-between gap-6 py-2">
           {/* Headline & Subtitle */}
-          <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start gap-2">
+          <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start gap-2.5">
             <HeroDisclaimerBadge />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-200 to-sky-300 bg-clip-text text-transparent leading-tight drop-shadow-sm">
               FACTS-ONLY MUTUAL FUND ASSISTANT
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
               Ask factual questions about mutual fund schemes using verified official sources from HDFC AMC, SEBI, and AMFI. Strict adherence to zero investment advice.
             </p>
           </div>
 
           {/* 3D Visual Hero */}
-          <div className="w-full md:w-56 h-36 md:h-44 flex items-center justify-center">
+          <div className="w-full md:w-60 h-40 md:h-48 flex items-center justify-center relative">
+            <div className="absolute inset-0 bg-indigo-500/10 rounded-full filter blur-xl pointer-events-none" />
             <Suspense fallback={
               <div className="w-24 h-24 rounded-full border-2 border-dashed border-indigo-400/40 animate-spin" />
             }>
@@ -132,7 +139,8 @@ export default function App() {
         />
 
         {/* Chat Card Container */}
-        <div className="w-full flex-1 rounded-3xl glass-panel p-3 sm:p-5 shadow-2xl flex flex-col border border-white/10">
+        <div className="w-full flex-1 rounded-3xl glass-panel p-3.5 sm:p-6 shadow-2xl flex flex-col border border-white/10 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
           <ChatPanel
             messages={messages}
             isLoading={isLoading}

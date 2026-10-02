@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon, ShieldCheck, Database, Zap, ZapOff } from 'lucide-react';
+import { Sun, Moon, ShieldCheck, Database, Zap, ZapOff, CheckCircle2 } from 'lucide-react';
 
 export default function Navbar({
   isDark,
@@ -9,49 +9,60 @@ export default function Navbar({
   onOpenSources
 }) {
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b transition-colors duration-300">
+    <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-sky-400 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <ShieldCheck className="w-5 h-5 text-white" />
+          <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-indigo-600 to-sky-400 p-[1px] shadow-lg shadow-indigo-500/20">
+            <div className="w-full h-full rounded-[15px] bg-[#0c1222] flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-[#0c1222]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-base sm:text-lg tracking-tight text-slate-100 dark:text-white">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                 Facts-Only MF
               </span>
-              <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Verified
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <CheckCircle2 className="w-2.5 h-2.5" />
+                Verified Sources
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 hidden md:block">
-              HDFC AMC • SEBI • AMFI Official Sources
+            <p className="text-[11px] text-slate-400 hidden sm:flex items-center gap-1.5 font-medium">
+              <span>HDFC AMC</span>
+              <span className="text-slate-600">•</span>
+              <span>SEBI</span>
+              <span className="text-slate-600">•</span>
+              <span>AMFI Knowledge Center</span>
             </p>
           </div>
         </div>
 
         {/* Actions & Toggles */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Sources Explorer Button */}
           <button
             onClick={onOpenSources}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 dark:text-slate-200 hover:text-white bg-slate-800/60 dark:bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/50 transition-all cursor-pointer"
+            className="group flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 hover:border-indigo-500/50 transition-all shadow-sm cursor-pointer"
             title="View all 24 verified sources"
           >
-            <Database className="w-3.5 h-3.5 text-indigo-400" />
-            <span className="hidden xs:inline">Sources (24)</span>
+            <Database className="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform" />
+            <span>Official Sources</span>
+            <span className="px-1.5 py-0.2 rounded-md bg-indigo-500/20 text-indigo-300 text-[10px] font-mono">
+              24
+            </span>
           </button>
 
           {/* Reduce Motion Toggle */}
           <button
             onClick={() => setReduceMotion(!reduceMotion)}
-            className={`p-2 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
+            className={`p-2 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
               reduceMotion
-                ? 'bg-amber-500/15 border-amber-500/30 text-amber-300'
-                : 'bg-slate-800/60 border-slate-700/50 text-slate-400 hover:text-slate-200'
+                ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+                : 'bg-slate-800/80 border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600'
             }`}
-            title={reduceMotion ? "Motion reduced (click to enable 3D animations)" : "Reduce motion"}
+            title={reduceMotion ? "Motion reduced (click to enable 3D animations)" : "Reduce motion for 3D Hero"}
             aria-label="Toggle reduced motion"
           >
             {reduceMotion ? <ZapOff className="w-4 h-4" /> : <Zap className="w-4 h-4" />}
@@ -60,7 +71,7 @@ export default function Navbar({
           {/* Theme Toggle */}
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2 rounded-lg bg-slate-800/60 dark:bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/50 text-slate-300 hover:text-white transition-all cursor-pointer"
+            className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 text-slate-300 hover:text-white transition-all cursor-pointer"
             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme"
           >
