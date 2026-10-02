@@ -94,9 +94,9 @@ const SCHEME_DATA = [
 
 export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQuestion, disabled }) {
   return (
-    <div className="w-full my-1">
+    <div className="w-full shrink-0 my-0.5">
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-2.5 px-1">
+      <div className="flex items-center justify-between mb-2 px-1">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-[#00D09C] shadow-[0_0_8px_#00D09C] animate-pulse" />
           <h2 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100">
@@ -118,7 +118,7 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
             <div
               key={scheme.id}
               onClick={() => onSelectScheme(scheme.id)}
-              className={`group relative rounded-2xl p-3.5 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none overflow-hidden ${
+              className={`group relative rounded-2xl p-3 border transition-all duration-150 ease-out flex flex-col justify-between cursor-pointer select-none overflow-hidden ${
                 isSelected
                   ? 'border-[#00D09C] bg-white dark:bg-slate-900/95 shadow-md dark:shadow-[0_0_24px_rgba(0,208,156,0.22)] ring-1 ring-[#00D09C]/60 scale-[1.01]'
                   : 'border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/80 hover:border-slate-300 dark:hover:border-slate-500 hover:shadow-md active:scale-[0.98]'

@@ -157,7 +157,7 @@ export default function App() {
         </section>
 
         {/* Right Column (42% width): Scheme Explorer & Live NAV Telemetry */}
-        <section className="w-full lg:w-[42%] flex flex-col gap-4 overflow-y-auto lg:h-[calc(100vh-6.5rem)] pr-1 scrollbar-none">
+        <section className="w-full lg:w-[42%] flex flex-col gap-3.5 overflow-y-auto lg:h-[calc(100vh-6.5rem)] pr-1.5 scroll-smooth">
           {/* Interactive Animated Financial NAV Graph */}
           <TelemetryCard
             isLoading={isLoading}

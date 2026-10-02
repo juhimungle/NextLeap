@@ -67,10 +67,10 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
   };
 
   return (
-    <div className="w-full rounded-2xl p-4 bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-xl relative overflow-hidden select-none">
+    <div className="w-full shrink-0 rounded-2xl p-3.5 bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-xl relative select-none">
       {/* Top Ambient Glow Beam */}
       <div
-        className="absolute top-0 left-0 right-0 h-[2px] transition-all duration-300"
+        className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300"
         style={{
           background: `linear-gradient(90deg, transparent, ${currentChart.color}, transparent)`,
           boxShadow: `0 0 14px ${currentChart.color}`
@@ -78,16 +78,16 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       />
 
       {/* Header: Title & Grounding Beacon */}
-      <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 dark:border-white/10">
+      <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-white/10">
         <div className="flex items-center gap-2">
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center border transition-colors duration-200"
+            className="w-6 h-6 rounded-lg flex items-center justify-center border transition-colors duration-200"
             style={{
               backgroundColor: `${currentChart.color}20`,
               borderColor: `${currentChart.color}40`
             }}
           >
-            <TrendingUp className="w-4 h-4" style={{ color: currentChart.color }} />
+            <TrendingUp className="w-3.5 h-3.5" style={{ color: currentChart.color }} />
           </div>
           <div>
             <div className="text-xs font-extrabold uppercase tracking-wider text-slate-900 dark:text-slate-100 flex items-center gap-1.5 font-mono">
@@ -110,7 +110,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Interactive Scheme Filter Tabs */}
-      <div className="flex items-center justify-between gap-1 mt-2.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 text-[11px] font-mono">
+      <div className="flex items-center justify-between gap-1 mt-2 p-1 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 text-[11px] font-mono">
         {Object.entries(SCHEME_CHARTS).map(([key, data]) => {
           const isActive = activeTab === key;
           return (
@@ -132,16 +132,9 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Live Animated Financial Area Graph */}
-      <div className="relative mt-2.5 pt-1 pb-1 px-2 rounded-xl bg-slate-50/80 dark:bg-transparent border border-slate-200 dark:border-white/5 overflow-hidden">
-        {/* Subtle Horizontal Reference Grid Lines */}
-        <div className="absolute inset-0 flex flex-col justify-between py-3 px-4 pointer-events-none opacity-20">
-          <div className="border-b border-dashed border-slate-400 dark:border-slate-500 w-full" />
-          <div className="border-b border-dashed border-slate-400 dark:border-slate-500 w-full" />
-          <div className="border-b border-dashed border-slate-400 dark:border-slate-500 w-full" />
-        </div>
-
+      <div className="relative mt-2 pt-1 pb-1 px-2 rounded-xl bg-slate-50/80 dark:bg-transparent border border-slate-200 dark:border-white/5 overflow-hidden">
         {/* Dynamic SVG Animated Chart */}
-        <svg viewBox="0 0 380 100" className="w-full h-24 overflow-visible relative z-10">
+        <svg viewBox="0 0 380 90" className="w-full h-20 overflow-visible relative z-10">
           <defs>
             <linearGradient id={currentChart.gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor={currentChart.color} stopOpacity="0.45" />
@@ -200,8 +193,8 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* RAG Engine Operational Guarantee Matrix */}
-      <div className="grid grid-cols-2 gap-2 mt-2.5 text-xs font-mono">
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
+      <div className="grid grid-cols-2 gap-2 mt-2 text-xs font-mono">
+        <div className="p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <Database className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
             <span className="text-[10px] text-slate-700 dark:text-slate-300">24 Official SIDs</span>
@@ -209,7 +202,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
           <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">0 Aggregators</span>
         </div>
 
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
+        <div className="p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
             <span className="text-[10px] text-slate-700 dark:text-slate-300">SEBI Compliant</span>
