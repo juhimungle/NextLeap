@@ -125,6 +125,64 @@ export default function ChatPanel({ messages, isLoading, error, onRetry, onSelec
 
   return (
     <div className="w-full flex flex-col gap-3 py-1">
+      {/* Empty State / Welcome Showcase */}
+      {messages.length === 0 && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/50 border border-white/5 text-center my-auto">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-sky-500 to-indigo-600 p-[1px] mx-auto mb-2 shadow-lg shadow-emerald-500/20">
+            <div className="w-full h-full rounded-[15px] bg-[#0c1222] flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-emerald-400" />
+            </div>
+          </div>
+          <h3 className="text-base font-bold text-white mb-1">
+            HDFC Mutual Fund Fact Intelligence
+          </h3>
+          <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed mb-3">
+            Interrogates verified official SIDs, KIMs, and SEBI/AMFI regulatory guidelines with deterministic grounding.
+          </p>
+
+          {/* 3 Core Trust Safeguards */}
+          <div className="grid grid-cols-3 gap-2 max-w-lg mx-auto text-left mb-3.5 font-mono text-[10px]">
+            <div className="p-2 rounded-xl bg-slate-900/80 border border-white/5 flex flex-col">
+              <span className="text-sky-400 font-bold">24 SIDs</span>
+              <span className="text-slate-400">0 Aggregators</span>
+            </div>
+            <div className="p-2 rounded-xl bg-slate-900/80 border border-white/5 flex flex-col">
+              <span className="text-emerald-400 font-bold">0% Guesses</span>
+              <span className="text-slate-400">No Advice</span>
+            </div>
+            <div className="p-2 rounded-xl bg-slate-900/80 border border-white/5 flex flex-col">
+              <span className="text-amber-400 font-bold">PII Shield</span>
+              <span className="text-slate-400">Auto Filtered</span>
+            </div>
+          </div>
+
+          {/* Clickable Suggested Inquiries */}
+          <div className="text-left">
+            <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 mb-2">
+              Popular Official Inquiries (Click to Ask):
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {FEATURED_PROMPTS.map((item, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => onSelectQuestion && onSelectQuestion(item.query)}
+                  className="p-2.5 rounded-xl bg-slate-900/70 hover:bg-slate-800/90 border border-white/5 hover:border-emerald-500/40 text-left transition-all duration-100 ease-out active:scale-95 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 mb-0.5">
+                    <span>{item.icon}</span>
+                    <span>{item.category}</span>
+                  </div>
+                  <div className="text-[11px] text-slate-300 group-hover:text-white leading-tight font-medium">
+                    {item.query}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Message List */}
       {messages.map((m, idx) => (
         <div key={idx} className="flex flex-col gap-2">

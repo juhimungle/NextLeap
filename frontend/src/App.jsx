@@ -104,36 +104,49 @@ export default function App() {
         onOpenGuide={() => setGuideOpen(true)}
       />
 
-      {/* Main Content Container */}
-      <main className="relative z-10 flex-1 max-w-6xl xl:max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-5 flex flex-col gap-5">
-        {/* Top Hero Section */}
-        <section className="w-full flex flex-col items-center text-center gap-3 pt-2 pb-1">
-          <HeroDisclaimerBadge />
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-100 to-sky-300 bg-clip-text text-transparent leading-tight drop-shadow-sm max-w-4xl">
-            FACTS-ONLY MUTUAL FUND ASSISTANT
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-            Directly interrogates official scheme information documents (SIDs), key information memoranda (KIMs), and SEBI/AMFI regulatory guidelines for factual certainty. Zero investment advice.
-          </p>
+      {/* Main Content Container - Split-Screen Command Center */}
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-3 flex flex-col lg:flex-row gap-5">
+        {/* Left Column (58% width): AI Fact Assistant Workspace */}
+        <section className="flex-1 lg:w-[58%] flex flex-col rounded-3xl bg-slate-900/60 backdrop-blur-2xl border border-white/10 shadow-2xl p-4 sm:p-5 relative overflow-hidden min-h-[620px] lg:h-[calc(100vh-6.5rem)]">
+          {/* Top Neon Edge Accent */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500 shadow-[0_0_12px_#00D09C]" />
 
-          {/* Institutional Trust Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-[11px]">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-semibold shadow-xs">
-              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-              4 Curated Schemes
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-300 font-semibold shadow-xs">
-              <Cpu className="w-3 h-3 text-sky-400" />
-              24 SIDs & KIMs
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 font-semibold shadow-xs">
-              <TrendingUp className="w-3 h-3 text-indigo-400" />
-              563 Chunks Indexed
-            </span>
+          {/* Workspace Title & Trust Bar */}
+          <div className="flex items-center justify-between pb-3 mb-2 border-b border-white/10 shrink-0">
+            <div>
+              <div className="flex items-center gap-2">
+                <HeroDisclaimerBadge />
+                <span className="text-[11px] font-mono text-emerald-400 font-bold hidden sm:inline">
+                  • 100% Grounded
+                </span>
+              </div>
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white mt-1">
+                FACTS-ONLY MUTUAL FUND ASSISTANT
+              </h1>
+              <p className="text-xs text-slate-300 font-normal">
+                Directly interrogates official HDFC AMC SIDs & SEBI guidelines. Strict zero advice.
+              </p>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-1.5 font-mono text-[10px] text-slate-400">
+              <span className="px-2 py-0.5 rounded bg-slate-800 border border-white/5 text-emerald-300">24 SIDs</span>
+              <span className="px-2 py-0.5 rounded bg-slate-800 border border-white/5 text-sky-300">563 Chunks</span>
+            </div>
           </div>
 
-          {/* PROMINENT CHATBOT INPUT BAR (Centerpiece - Immediately Visible Above the Fold) */}
-          <div className="w-full max-w-3xl mt-2">
+          {/* Scrollable Conversation Stream */}
+          <div className="flex-1 overflow-y-auto pr-1 scrollbar-none my-1">
+            <ChatPanel
+              messages={messages}
+              isLoading={isLoading}
+              error={error}
+              onRetry={handleRetry}
+              onSelectQuestion={handleSendMessage}
+            />
+          </div>
+
+          {/* Pinned Input Bar at Bottom of Workspace */}
+          <div className="pt-2 border-t border-white/10 mt-auto shrink-0">
             <InputBar
               onSendMessage={handleSendMessage}
               isLoading={isLoading}
@@ -143,39 +156,22 @@ export default function App() {
           </div>
         </section>
 
-        {/* Live Conversation Stream (Only shows when messages or loading exist, completely merged into page) */}
-        {(messages.length > 0 || isLoading || error) && (
-          <section className="w-full max-w-4xl mx-auto py-2">
-            <ChatPanel
-              messages={messages}
-              isLoading={isLoading}
-              error={error}
-              onRetry={handleRetry}
-              onSelectQuestion={handleSendMessage}
-            />
-          </section>
-        )}
-
-        {/* Seamless Financial Telemetry & Scheme Directory (Integrated Into Page Background) */}
-        <section className="w-full flex flex-col lg:flex-row gap-4 items-start justify-between mt-1">
-          {/* 4 Scheme Directory Cards */}
-          <div className="flex-1 w-full">
-            <SchemeCardsGrid
-              selectedScheme={selectedScheme}
-              onSelectScheme={setSelectedScheme}
-              onAskQuestion={handleSendMessage}
-              disabled={isLoading}
-            />
-          </div>
-
+        {/* Right Column (42% width): Scheme Explorer & Live NAV Telemetry */}
+        <section className="w-full lg:w-[42%] flex flex-col gap-4 overflow-y-auto lg:h-[calc(100vh-6.5rem)] pr-1 scrollbar-none">
           {/* Interactive Animated Financial NAV Graph */}
-          <div className="w-full lg:w-[420px] shrink-0 lg:mt-9">
-            <TelemetryCard
-              isLoading={isLoading}
-              selectedScheme={selectedScheme}
-              onSelectScheme={setSelectedScheme}
-            />
-          </div>
+          <TelemetryCard
+            isLoading={isLoading}
+            selectedScheme={selectedScheme}
+            onSelectScheme={setSelectedScheme}
+          />
+
+          {/* 4 Scheme Directory Cards (2x2 Grid) */}
+          <SchemeCardsGrid
+            selectedScheme={selectedScheme}
+            onSelectScheme={setSelectedScheme}
+            onAskQuestion={handleSendMessage}
+            disabled={isLoading}
+          />
         </section>
       </main>
 

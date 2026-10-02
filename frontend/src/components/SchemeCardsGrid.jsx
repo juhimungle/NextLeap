@@ -108,8 +108,8 @@ export default function SchemeCardsGrid({ selectedScheme, onSelectScheme, onAskQ
         </span>
       </div>
 
-      {/* 4 WealthTech Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {/* 4 WealthTech Cards Grid (2x2 Layout to ensure zero text truncation) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
         {SCHEME_DATA.map((scheme) => {
           const isSelected = selectedScheme === scheme.id;
           const Icon = scheme.icon;
