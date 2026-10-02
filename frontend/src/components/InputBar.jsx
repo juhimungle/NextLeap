@@ -91,9 +91,10 @@ export default function InputBar({ onSendMessage, isLoading, onClearChat, hasMes
                   <button
                     type="submit"
                     disabled={!text.trim() || isLoading}
-                    className="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 via-[#00D09C] to-teal-400 text-slate-950 font-bold text-xs shadow-md shadow-emerald-500/25 hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 via-[#00D09C] to-teal-400 text-slate-950 font-bold text-xs shadow-md shadow-emerald-500/25 hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0"
                   >
-                    <span>{isLoading ? 'Verifying...' : 'Ask Assistant'}</span>
+                    <span className="hidden sm:inline">{isLoading ? 'Verifying...' : 'Ask Assistant'}</span>
+                    <span className="sm:hidden">{isLoading ? 'Wait...' : 'Ask'}</span>
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>

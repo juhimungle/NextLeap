@@ -5,6 +5,7 @@ const SCHEME_CHARTS = {
   "HDFC Flexi Cap Fund": {
     name: "HDFC Flexi Cap Fund",
     shortName: "Flexi Cap",
+    mobileName: "Flexi",
     benchmark: "NIFTY 500 TRI",
     color: "#00D09C",
     fillColor: "rgba(0, 208, 156, 0.2)",
@@ -17,6 +18,7 @@ const SCHEME_CHARTS = {
   "HDFC Large Cap Fund": {
     name: "HDFC Large Cap Fund",
     shortName: "Large Cap",
+    mobileName: "Large",
     benchmark: "NIFTY 100 TRI",
     color: "#0284c7",
     fillColor: "rgba(2, 132, 199, 0.2)",
@@ -29,6 +31,7 @@ const SCHEME_CHARTS = {
   "HDFC ELSS Tax Saver": {
     name: "HDFC ELSS Tax Saver",
     shortName: "ELSS Tax",
+    mobileName: "ELSS",
     benchmark: "NIFTY 500 TRI",
     color: "#6366f1",
     fillColor: "rgba(99, 102, 241, 0.2)",
@@ -41,6 +44,7 @@ const SCHEME_CHARTS = {
   "HDFC Mid-Cap Opportunities Fund": {
     name: "HDFC Mid-Cap Opportunities",
     shortName: "Mid-Cap",
+    mobileName: "Mid-Cap",
     benchmark: "NIFTY Midcap 150 TRI",
     color: "#d97706",
     fillColor: "rgba(217, 119, 6, 0.2)",
@@ -110,7 +114,7 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* Interactive Scheme Filter Tabs */}
-      <div className="flex items-center justify-between gap-1 mt-2 p-1 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 text-[11px] font-mono">
+      <div className="grid grid-cols-4 gap-1 mt-2 p-1 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 text-[10px] sm:text-[11px] font-mono">
         {Object.entries(SCHEME_CHARTS).map(([key, data]) => {
           const isActive = activeTab === key;
           return (
@@ -118,14 +122,15 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
               key={key}
               type="button"
               onClick={() => handleTabClick(key)}
-              className={`flex-1 py-1 px-1.5 rounded-lg text-center transition-all duration-100 ease-out active:scale-95 cursor-pointer font-semibold truncate ${
+              className={`py-1 px-1 rounded-lg text-center transition-all duration-100 ease-out active:scale-95 cursor-pointer font-semibold ${
                 isActive
                   ? 'bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-xs border border-slate-200 dark:border-white/10'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 border border-transparent'
               }`}
               style={isActive ? { color: data.color } : {}}
             >
-              {data.shortName}
+              <span className="hidden sm:inline">{data.shortName}</span>
+              <span className="sm:hidden">{data.mobileName}</span>
             </button>
           );
         })}
@@ -193,19 +198,19 @@ export default function TelemetryCard({ isLoading, selectedScheme, onSelectSchem
       </div>
 
       {/* RAG Engine Operational Guarantee Matrix */}
-      <div className="grid grid-cols-2 gap-2 mt-2 text-xs font-mono">
-        <div className="p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-2 text-xs font-mono">
+        <div className="p-1.5 sm:p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5 sm:gap-1">
           <div className="flex items-center gap-1.5">
-            <Database className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
-            <span className="text-[10px] text-slate-700 dark:text-slate-300">24 Official SIDs</span>
+            <Database className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400 shrink-0" />
+            <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium">24 SIDs</span>
           </div>
           <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">0 Aggregators</span>
         </div>
 
-        <div className="p-1.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex items-center justify-between">
+        <div className="p-1.5 sm:p-2 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-0.5 sm:gap-1">
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-            <span className="text-[10px] text-slate-700 dark:text-slate-300">SEBI Compliant</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0" />
+            <span className="text-[10px] text-slate-700 dark:text-slate-300 font-medium">SEBI Compliant</span>
           </div>
           <span className="text-[10px] text-amber-600 dark:text-amber-300 font-bold">0 Advice</span>
         </div>

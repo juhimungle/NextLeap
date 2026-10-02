@@ -13,19 +13,19 @@ export default function Navbar({
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-200 dark:border-white/10 transition-colors duration-300 bg-white/80 dark:bg-[#0c1222]/80 backdrop-blur-md">
       <div className="max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand */}
-        <div className="flex items-center gap-3">
-          <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-indigo-600 to-sky-400 p-[1px] shadow-lg shadow-indigo-500/20">
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-indigo-600 to-sky-400 p-[1px] shadow-lg shadow-indigo-500/20 shrink-0">
             <div className="w-full h-full rounded-[15px] bg-slate-50 dark:bg-[#0c1222] flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 dark:text-emerald-400" />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white dark:border-[#0c1222]" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 border-2 border-white dark:border-[#0c1222]" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="font-extrabold text-sm sm:text-lg tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
                 Facts-Only MF
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+              <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                 <CheckCircle2 className="w-2.5 h-2.5" />
                 Verified Sources
               </span>
